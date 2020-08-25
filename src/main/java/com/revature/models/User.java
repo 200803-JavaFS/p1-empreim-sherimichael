@@ -7,6 +7,7 @@ public class User {
 	private String password;
 	private String firstName;
 	private String lastName;
+	private String email;
 	private int UserRoleId;
 	
 	
@@ -16,23 +17,25 @@ public class User {
 	}
 
 	//full args constructor
-	public User(int userId, String username, String password, String firstName, String lastName, int userRoleId) {
+	public User(int userId, String username, String password, String firstName, String lastName, String email, int userRoleId) {
 		super();
 		UserId = userId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 		UserRoleId = userRoleId;
 	}
 
 	//full args minus UserId (SERIAL in dB)
-	public User(String username, String password, String firstName, String lastName, int userRoleId) {
+	public User(String username, String password, String firstName, String lastName, String email, int userRoleId) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
+		this.email = email;
 		UserRoleId = userRoleId;
 	}
 
@@ -76,12 +79,20 @@ public class User {
 		this.lastName = lastName;
 	}
 
-	public int getUserRole() {
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public int getUserRoleId() {
 		return UserRoleId;
 	}
 
-	public void setUserRole(int userRole) {
-		UserRoleId = userRole;
+	public void setUserRoleId(int userRoleId) {
+		UserRoleId = userRoleId;
 	}
 
 	@Override
@@ -90,6 +101,7 @@ public class User {
 		int result = 1;
 		result = prime * result + UserId;
 		result = prime * result + UserRoleId;
+		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
@@ -109,6 +121,11 @@ public class User {
 		if (UserId != other.UserId)
 			return false;
 		if (UserRoleId != other.UserRoleId)
+			return false;
+		if (email == null) {
+			if (other.email != null)
+				return false;
+		} else if (!email.equals(other.email))
 			return false;
 		if (firstName == null) {
 			if (other.firstName != null)
@@ -136,7 +153,6 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [UserId=" + UserId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", UserRoleId=" + UserRoleId + "]";
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", UserRoleId=" + UserRoleId + "]";
 	}	
-
 }

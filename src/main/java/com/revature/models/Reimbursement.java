@@ -7,7 +7,7 @@ public class Reimbursement {
 	private String submitted;
 	private String resolved;
 	private String description;
-	private String receipt; //confirm blob
+	//private String receipt; //confirm blob
 	private int author;
 	private int resolver;
 	private int statusId;
@@ -20,14 +20,14 @@ public class Reimbursement {
 
 
 	public Reimbursement(int reimbId, double amount, String submitted, String resolved, String description,
-			String receipt, int author, int resolver, int statusId, int typeId) {
+		 int author, int resolver, int statusId, int typeId) {
 		super();
 		this.reimbId = reimbId;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.description = description;
-		this.receipt = receipt;
+		//this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -35,14 +35,14 @@ public class Reimbursement {
 	}
 
 
-	public Reimbursement(double amount, String submitted, String resolved, String description, String receipt,
+	public Reimbursement(double amount, String submitted, String resolved, String description,
 			int author, int resolver, int statusId, int typeId) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.description = description;
-		this.receipt = receipt;
+		//this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -99,7 +99,7 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-
+/*
 	public String getReceipt() {
 		return receipt;
 	}
@@ -108,7 +108,7 @@ public class Reimbursement {
 	public void setReceipt(String receipt) {
 		this.receipt = receipt;
 	}
-
+*/
 
 	public int getAuthor() {
 		return author;
@@ -159,7 +159,7 @@ public class Reimbursement {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + author;
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((receipt == null) ? 0 : receipt.hashCode());
+		//result = prime * result + ((receipt == null) ? 0 : receipt.hashCode());
 		result = prime * result + reimbId;
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
 		result = prime * result + resolver;
@@ -188,11 +188,13 @@ public class Reimbursement {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (receipt == null) {
+		/*
+		 * if (receipt == null) {
 			if (other.receipt != null)
 				return false;
 		} else if (!receipt.equals(other.receipt))
 			return false;
+		*/
 		if (reimbId != other.reimbId)
 			return false;
 		if (resolved == null) {
@@ -218,7 +220,7 @@ public class Reimbursement {
 	@Override
 	public String toString() {
 		return "Reimbursement [reimbId=" + reimbId + ", amount=" + amount + ", submitted=" + submitted + ", resolved="
-				+ resolved + ", description=" + description + ", receipt=" + receipt + ", author=" + author
+				+ resolved + ", description=" + description + ", author=" + author
 				+ ", resolver=" + resolver + ", statusId=" + statusId + ", typeId=" + typeId + "]";
 	}
 }

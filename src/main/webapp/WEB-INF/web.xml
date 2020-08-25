@@ -10,13 +10,13 @@
     <welcome-file>default.jsp</welcome-file>
   </welcome-file-list>
   <servlet>
-      <description></description>
-      <display-name>MasterServlet</display-name>
-      <servlet-name>MasterServlet</servlet-name>
-      <servlet-class>com.revature.controllers.MasterServlet</servlet-class>
+    <description></description>
+    <display-name>MasterServlet</display-name>
+    <servlet-name>MasterServlet</servlet-name>
+    <servlet-class>com.revature.web.Servlet</servlet-class>
   </servlet>
   <servlet-mapping>
-      <servlet-name>MasterServlet</servlet-name>
-      <url-pattern>/master</url-pattern>
+    <servlet-name>MasterServlet</servlet-name>
+    <url-pattern>/MasterServlet</url-pattern>
   </servlet-mapping>
 </web-app>

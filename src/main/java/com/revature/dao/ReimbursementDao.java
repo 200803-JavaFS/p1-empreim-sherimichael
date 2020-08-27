@@ -26,9 +26,6 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 				ResultSet result = statement.executeQuery(sql);
 				
 				while(result.next()) {
-					//using all arg constructor instead of setting
-					//(reimb_amount, reimb_submitted, reimb_resolved, reimb_description, 
-					//reimb_author,	reim_resolver, reim_status_id,	reim_type_id)
 					Reimbursement r = new Reimbursement(result.getInt("reimb_id"),
 							result.getDouble("reimb_amount"),
 							result.getString("reimb_submitted"),
@@ -79,9 +76,9 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 		}
 		
 		@Override
-		public List<Reimbursement> findByUser(int userId) {
+		public List<Reimbursement> findByUser(int id) {
 			try(Connection conn= ConnectionUtility.getConnection()){
-				String sql = "SELECT * FROM reimbursement WHERE reimb_author =" +userId+";";
+				String sql = "SELECT * FROM reimbursement WHERE reimb_author =" +id+";";
 				Statement statement = conn.createStatement();
 				List<Reimbursement> list = new ArrayList<>();
 				ResultSet result = statement.executeQuery(sql);

@@ -1,7 +1,5 @@
 package com.revature.models;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +8,6 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -21,7 +18,7 @@ public class User {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_id", nullable=false)
-	private int UserId;
+	private int userId;
 	
 	@Column(name="username", nullable=false, unique=true)
 	private String username;
@@ -40,7 +37,7 @@ public class User {
 	
 	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
 	@JoinColumn(name="user_role_id", referencedColumnName = "user_role_id", nullable=false)
-	private int UserRoleId;
+	private int userRoleId;
 	
 	
 	//no args constructor
@@ -49,34 +46,33 @@ public class User {
 	}
 	
 	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			int userRoleId, List<Reimbursement> reimbList) {
+			int userRoleId) {
 		super();
-		UserId = userId;
+		this.userId = userId;
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		UserRoleId = userRoleId;
+		this.userRoleId = userRoleId;
 	}
 	
-	public User(String username, String password, String firstName, String lastName, String email, int userRoleId,
-			List<Reimbursement> reimbList) {
+	public User(String username, String password, String firstName, String lastName, String email, int userRoleId) {
 		super();
 		this.username = username;
 		this.password = password;
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.email = email;
-		UserRoleId = userRoleId;
+		this.userRoleId = userRoleId;
 	}
 
 	public int getUserId() {
-		return UserId;
+		return userId;
 	}
 
 	public void setUserId(int userId) {
-		UserId = userId;
+		userId = userId;
 	}
 
 	public String getUsername() {
@@ -120,11 +116,11 @@ public class User {
 	}
 
 	public int getUserRoleId() {
-		return UserRoleId;
+		return userRoleId;
 	}
 
 	public void setUserRoleId(int userRoleId) {
-		UserRoleId = userRoleId;
+		this.userRoleId = userRoleId;
 	}
 
 
@@ -132,8 +128,8 @@ public class User {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + UserId;
-		result = prime * result + UserRoleId;
+		result = prime * result + userId;
+		result = prime * result + userRoleId;
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());
@@ -151,9 +147,9 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		if (UserId != other.UserId)
+		if (userId != other.userId)
 			return false;
-		if (UserRoleId != other.UserRoleId)
+		if (userRoleId != other.userRoleId)
 			return false;
 		if (email == null) {
 			if (other.email != null)
@@ -185,8 +181,8 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [UserId=" + UserId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", UserRoleId=" + UserRoleId
+		return "User [userId=" + userId + ", username=" + username + ", password=" + password + ", firstName="
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", UserRoleId=" + userRoleId
 				+ "]";
 	}
 }

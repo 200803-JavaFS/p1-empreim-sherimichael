@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.revature.controller.ReimbController;
-import com.revature.controller.UserController;
+//import com.revature.controller.ReimbController;
+//import com.revature.controller.UserController;
 
 
 public class MasterServlet extends HttpServlet{
 
 	private static final long serialVersionUID = 1L;
-	private static UserController uc = new UserController();
-	private static ReimbController rc = new ReimbController();
+	//private static UserController uc = new UserController();
+	//private static ReimbController rc = new ReimbController();
 
 	
 	public MasterServlet() {
@@ -39,12 +39,10 @@ public class MasterServlet extends HttpServlet{
 			switch(portions[0]) {
 				case "login":
 					if (req.getMethod().equals("POST")) {
-						System.out.println("inside login case");
-						uc.login(req, res);
+						//uc.login(req, res);
 					}
 //				case "employeeSuccess":
 //					if (req.getMethod().equals("POST")) {
-//						System.out.println("inside employee case");
 //						uc.display(req, res);
 //					}
 			}

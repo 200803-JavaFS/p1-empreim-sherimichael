@@ -24,7 +24,7 @@ public class Reimbursement {
 	@Column(name="amount", nullable=false)
 	private double amount;
 	
-	@Column(name="timestamp", nullable=false)
+	@Column(name="submitted", nullable=false)
 	private String submitted;
 	
 	@Column(name="resolved")

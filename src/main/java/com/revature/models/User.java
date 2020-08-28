@@ -8,6 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -35,7 +36,7 @@ public class User {
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
 	@JoinColumn(name="user_role_id", referencedColumnName = "user_role_id", nullable=false)
 	private int userRoleId;
 	

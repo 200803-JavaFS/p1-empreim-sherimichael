@@ -2,6 +2,8 @@ package com.revature.dao;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
@@ -10,6 +12,7 @@ import com.revature.utils.HibernateUtil;
 
 public class UserDao implements UserDaoIf {
 	
+	private static final Logger log = LogManager.getLogger(UserDao.class);
 	
 	public UserDao() {
 		super();
@@ -18,6 +21,7 @@ public class UserDao implements UserDaoIf {
 	public List<User> findAll() {
 		Session ses = HibernateUtil.getSession();
 		
+		@SuppressWarnings("unchecked")
 		List<User> userList = ses.createQuery("FROM Users").list();
 		
 		return userList;
@@ -32,6 +36,7 @@ public class UserDao implements UserDaoIf {
 	}
 	
 	public void addUser(User u) {
+		log.info("@addUser in UserDao");
 		Session ses = HibernateUtil.getSession();
 		
 		Transaction tx = ses.beginTransaction();

@@ -2,6 +2,9 @@ package com.revature;
 
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.revature.dao.ReimbursementDao;
 import com.revature.dao.UserDao;
 import com.revature.models.Reimbursement;
@@ -11,8 +14,12 @@ public class Driver {
 		
 	public static UserDao uDao = new UserDao();
 	public static ReimbursementDao rDao = new ReimbursementDao();
+	
+	private static final Logger log = LogManager.getLogger(Driver.class);
 
 	public static void main(String[] args) {
+		
+		log.info("@main in Driver - app starting");
 			
 		insertValues();
 			
@@ -29,7 +36,7 @@ public class Driver {
 			User u2 = new User("joker", "whysoserious", "The", "Joker", "joker@email.com", 1);
 			uDao.addUser(u2);
 			
-			Reimbursement r1 = new Reimbursement(27.56, "Yes", "No", "Client Mtg", 1, 2, 1, 2);
+			Reimbursement r1 = new Reimbursement(27.56, "Timestamp", "Timestamp", "Client Mtg", u1, u2, 1, 2);
 			rDao.addReimbursement(r1);
 			
 		}

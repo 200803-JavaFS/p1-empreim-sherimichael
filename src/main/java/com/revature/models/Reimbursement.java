@@ -8,8 +8,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -33,19 +32,19 @@ public class Reimbursement {
 	@Column(name="description")
 	private String description;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="author", referencedColumnName = "user_id")
-	private int author;
+	private User author;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="resolver", referencedColumnName = "user_id")
-	private int resolver;
+	private User resolver;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="status_id", referencedColumnName = "status_id")
 	private int statusId;
 	
-	@OneToOne(cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="type_id", referencedColumnName = "type_id")
 	private int typeId;
 	
@@ -55,14 +54,13 @@ public class Reimbursement {
 
 
 	public Reimbursement(int reimbId, double amount, String submitted, String resolved, String description,
-		 int author, int resolver, int statusId, int typeId) {
+		 User author, User resolver, int statusId, int typeId) {
 		super();
 		this.reimbId = reimbId;
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.description = description;
-		//this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -71,7 +69,7 @@ public class Reimbursement {
 
 
 	public Reimbursement(double amount, String submitted, String resolved, String description,
-			int author, int resolver, int statusId, int typeId) {
+			User author, User resolver, int statusId, int typeId) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
@@ -134,20 +132,19 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-	public int getAuthor() {
+	public User getAuthor() {
 		return author;
 	}
 
-
-	public void setAuthor(int author) {
+	public void setAuthor(User author) {
 		this.author = author;
 	}
 
-	public int getResolver() {
+	public User getResolver() {
 		return resolver;
 	}
 
-	public void setResolver(int resolver) {
+	public void setResolver(User resolver) {
 		this.resolver = resolver;
 	}
 
@@ -166,7 +163,7 @@ public class Reimbursement {
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -174,17 +171,17 @@ public class Reimbursement {
 		long temp;
 		temp = Double.doubleToLongBits(amount);
 		result = prime * result + (int) (temp ^ (temp >>> 32));
-		result = prime * result + author;
+		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		//result = prime * result + ((receipt == null) ? 0 : receipt.hashCode());
 		result = prime * result + reimbId;
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
-		result = prime * result + resolver;
+		result = prime * result + ((resolver == null) ? 0 : resolver.hashCode());
 		result = prime * result + statusId;
 		result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
 		result = prime * result + typeId;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -197,7 +194,10 @@ public class Reimbursement {
 		Reimbursement other = (Reimbursement) obj;
 		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
 			return false;
-		if (author != other.author)
+		if (author == null) {
+			if (other.author != null)
+				return false;
+		} else if (!author.equals(other.author))
 			return false;
 		if (description == null) {
 			if (other.description != null)
@@ -211,7 +211,10 @@ public class Reimbursement {
 				return false;
 		} else if (!resolved.equals(other.resolved))
 			return false;
-		if (resolver != other.resolver)
+		if (resolver == null) {
+			if (other.resolver != null)
+				return false;
+		} else if (!resolver.equals(other.resolver))
 			return false;
 		if (statusId != other.statusId)
 			return false;

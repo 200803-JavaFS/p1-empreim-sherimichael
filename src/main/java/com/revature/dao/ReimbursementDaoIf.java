@@ -7,10 +7,9 @@ import com.revature.models.Reimbursement;
 public interface ReimbursementDaoIf {
 	
 	public List<Reimbursement> findAll();
-	public Reimbursement findById(int id);
-	public List<Reimbursement> findByUser(int id);
-	public List<Reimbursement> findByStatus(String status);
-	public boolean addReimbursement(Reimbursement addR);
-	public boolean updateReimbursement(Reimbursement updateR);
+	public Reimbursement findByReimId(int id);
+	public List<Reimbursement> findByUser(int author);
+	public void addReimbursement(Reimbursement addR);
+	public void updateReimbursement(Reimbursement updateR);
 
 }

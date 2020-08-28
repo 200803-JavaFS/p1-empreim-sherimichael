@@ -34,11 +34,11 @@ public class Reimbursement {
 	private String description;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="author", referencedColumnName = "user_role_id")
+	@JoinColumn(name="author", referencedColumnName = "user_id")
 	private int author;
 	
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="resolver", referencedColumnName = "user_role_id")
+	@JoinColumn(name="resolver", referencedColumnName = "user_id")
 	private int resolver;
 	
 	@OneToOne(cascade = CascadeType.ALL)

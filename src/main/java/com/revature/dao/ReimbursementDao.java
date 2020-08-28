@@ -8,13 +8,41 @@ import org.hibernate.Transaction;
 import com.revature.models.Reimbursement;
 import com.revature.utils.HibernateUtil;
 
-public class ReimbursementDAO {
+public class ReimbursementDao implements ReimbursementDaoIf {
 
-		public ReimbursementDAO() {
+		public ReimbursementDao() {
 			super();
 		}
 		
-		public void insert(Reimbursement r) {
+		@Override
+		public List<Reimbursement> findAll() {
+			Session ses = HibernateUtil.getSession();
+			
+			List<Reimbursement> rList = ses.createQuery("FROM Reimbursement").list();
+			
+			return rList;
+		}
+		
+		@Override
+		public Reimbursement findByReimId(int id) {
+			Session ses = HibernateUtil.getSession();
+			
+			Reimbursement r = ses.get(Reimbursement.class, id);
+			
+			return r;
+		}
+		
+		@Override
+		public List<Reimbursement> findByUser(int author) {
+			Session ses = HibernateUtil.getSession();
+			
+			List<Reimbursement> rList = ses.createQuery("FROM Reimbursement WHERE author = ?").list();
+			
+			return rList;
+		}
+		
+		@Override
+		public void addReimbursement(Reimbursement r) {
 			Session ses = HibernateUtil.getSession();
 			
 			Transaction tx = ses.beginTransaction();
@@ -24,42 +52,9 @@ public class ReimbursementDAO {
 			tx.commit();
 		}
 		
-		public void update(Reimbursement r) {
+		@Override
+		public void updateReimbursement(Reimbursement r) {
 			Session ses = HibernateUtil.getSession();
 			ses.merge(r);
 		}
-		
-		public List<Reimbursement> findByStatus(int id) {
-			Session ses = HibernateUtil.getSession();
-			
-			List<Reimbursement> rList = ses.createQuery("FROM Reimbursement").list();
-			
-			return rList;
-		}
-		
-		public List<Reimbursement> findByUser(int id) {
-			Session ses = HibernateUtil.getSession();
-			
-			List<Reimbursement> rList = ses.createQuery("FROM Reimbursement").list();
-			
-			return rList;
-		}
-		
-		public Reimbursement selectById(int id) {
-			Session ses = HibernateUtil.getSession();
-			
-			Reimbursement r = ses.get(Reimbursement.class, id);
-			
-			return r;
-		}
-		
-		public List<Reimbursement> findAll() {
-			Session ses = HibernateUtil.getSession();
-			
-			List<Reimbursement> rList = ses.createQuery("FROM Reimbursement").list();
-			
-			return rList;
-		}
-	}
-		
 }

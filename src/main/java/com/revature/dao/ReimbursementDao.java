@@ -11,14 +11,14 @@ import java.util.List;
 
 import com.revature.models.Reimbursement;
 import com.revature.models.User;
-import com.revature.utils.ConnectionUtility;
+import com.revature.utils.HibernateUtil;
 
 public class ReimbursementDao implements ReimbursementDaoIf{
 
 	
 		@Override
 		public List<Reimbursement> findAll() {
-			try(Connection conn= ConnectionUtility.getConnection()){
+			try(Connection conn= HibernateUtil.getConnection()){
 				String sql = "SELECT * FROM reimbursement;";
 				Statement statement = conn.createStatement();
 				List<Reimbursement> list = new ArrayList<>();
@@ -49,7 +49,7 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 
 		@Override
 		public Reimbursement findById(int id) {
-			try(Connection conn= ConnectionUtility.getConnection()){
+			try(Connection conn= HibernateUtil.getConnection()){
 				String sql = "SELECT * FROM reimbursement WHERE reimb_id =" +id+";";
 				Statement statement = conn.createStatement();
 				
@@ -77,7 +77,7 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 		
 		@Override
 		public List<Reimbursement> findByUser(int id) {
-			try(Connection conn= ConnectionUtility.getConnection()){
+			try(Connection conn= HibernateUtil.getConnection()){
 				String sql = "SELECT * FROM reimbursement WHERE reimb_author =" +id+";";
 				Statement statement = conn.createStatement();
 				List<Reimbursement> list = new ArrayList<>();
@@ -105,7 +105,7 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 		
 		@Override
 		public List<Reimbursement> findByStatus(String status) {
-			try(Connection conn= ConnectionUtility.getConnection()){
+			try(Connection conn= HibernateUtil.getConnection()){
 				String sql = "SELECT * FROM reimbursement"
 						+ "JOIN reimb_status"
 						+ "ON r.reim_status_id =rs.reimb_status_id"
@@ -138,7 +138,7 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 
 		@Override
 		public boolean addReimbursement(Reimbursement addR) {
-			try(Connection conn= ConnectionUtility.getConnection()){
+			try(Connection conn= HibernateUtil.getConnection()){
 				String sql = "INSERT INTO reimbursement (reimb_amount, reimb_submitted, reimb_resolved, reimb_description, "
 						+ "reimb_author, reim_resolver, reim_status_id,	reim_type_id) "
 						+ "VALUES (?, ?, ?, ?, ?, ?,?, ?, ?);";
@@ -168,7 +168,7 @@ public class ReimbursementDao implements ReimbursementDaoIf{
 
 		@Override
 		public boolean updateReimbursement(Reimbursement updateR) {
-			try(Connection conn= ConnectionUtility.getConnection()){
+			try(Connection conn= HibernateUtil.getConnection()){
 				String sql = "UPDATE reimbursement SET reimb_amount= ?, reimb_submitted= ?,"
 						+ " reimb_resolved= ?, reimb_description= ?, reimb_author= ?, reim_resolver= ? "
 						+ "reim_status_id=?,reim_type_id=? WHERE reimb_id=?;";

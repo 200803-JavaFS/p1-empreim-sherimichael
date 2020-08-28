@@ -14,7 +14,7 @@ public class UserDao implements UserDaoIf {
 	
 	@Override
 	public List<User> findAll() {
-		try(Connection conn= ConnectionUtility.getConnection()){
+		try(Connection conn= HibernateUtil.getConnection()){
 			String sql = "SELECT * FROM users;";
 			Statement statement = conn.createStatement();
 			List<User> list = new ArrayList<>();
@@ -44,7 +44,7 @@ public class UserDao implements UserDaoIf {
 
 	@Override
 	public User findById(int id) {
-		try(Connection conn= ConnectionUtility.getConnection()){
+		try(Connection conn= HibernateUtil.getConnection()){
 			String sql = "SELECT * FROM users WHERE user_id =" +id+";";
 			Statement statement = conn.createStatement();
 			
@@ -70,7 +70,7 @@ public class UserDao implements UserDaoIf {
 
 	@Override
 	public boolean addUser(User u) {
-		try(Connection conn= ConnectionUtility.getConnection()){
+		try(Connection conn= HibernateUtil.getConnection()){
 			String sql = "INSERT INTO users (user_username, user_password, user_first, user_last,"
 					+ "user_email, user_role_id)"
 					+ "VALUES (?, ?, ?, ?, ?, ?);";
@@ -97,7 +97,7 @@ public class UserDao implements UserDaoIf {
 
 	@Override
 	public boolean updateUser(User u) {
-		try(Connection conn= ConnectionUtility.getConnection()){
+		try(Connection conn= HibernateUtil.getConnection()){
 			String sql = "UPDATE users SET user_username= ?, user_password= ?,"
 					+ " user_first_name= ?, user_last_name= ?, user_email= ?, user_role_id= ? "
 					+ "WHERE user_id=?;";
@@ -124,7 +124,7 @@ public class UserDao implements UserDaoIf {
 
 	@Override
 	public User findByUserPassword(String username, String password) {
-		try(Connection conn= ConnectionUtility.getConnection()){
+		try(Connection conn= HibernateUtil.getConnection()){
 			String sql = "SELECT * FROM users WHERE user_username = ?"
 					+ "AND user_password= ?;";
 			PreparedStatement statement = conn.prepareStatement(sql);
@@ -153,7 +153,7 @@ public class UserDao implements UserDaoIf {
 
 	@Override
 	public User findByUsername(String username) {
-		try(Connection conn= ConnectionUtility.getConnection()){
+		try(Connection conn= HibernateUtil.getConnection()){
 			String sql = "SELECT * FROM users WHERE user_username = ?;";
 			PreparedStatement statement = conn.prepareStatement(sql);
 			

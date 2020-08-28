@@ -1,18 +1,53 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="reimbursement")
 public class Reimbursement {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="reimb_id", nullable=false)
 	private int reimbId;
-	private double amount;
-	private String submitted;
-	private String resolved;
-	private String description;
-	//private String receipt; //confirm blob
-	private int author;
-	private int resolver;
-	private int statusId;
-	private int typeId;
 	
+	@Column(name="amount", nullable=false)
+	private double amount;
+	
+	@Column(name="timestamp", nullable=false)
+	private String submitted;
+	
+	@Column(name="resolved")
+	private String resolved;
+	
+	@Column(name="description")
+	private String description;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="author", referencedColumnName = "user_role_id")
+	private int author;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="resolver", referencedColumnName = "user_role_id")
+	private int resolver;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="status_id", referencedColumnName = "status_id")
+	private int statusId;
+	
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="type_id", referencedColumnName = "type_id")
+	private int typeId;
 	
 	public Reimbursement() {
 		super();
@@ -99,17 +134,6 @@ public class Reimbursement {
 		this.description = description;
 	}
 
-/*
-	public String getReceipt() {
-		return receipt;
-	}
-
-
-	public void setReceipt(String receipt) {
-		this.receipt = receipt;
-	}
-*/
-
 	public int getAuthor() {
 		return author;
 	}
@@ -119,36 +143,29 @@ public class Reimbursement {
 		this.author = author;
 	}
 
-
 	public int getResolver() {
 		return resolver;
 	}
-
 
 	public void setResolver(int resolver) {
 		this.resolver = resolver;
 	}
 
-
 	public int getStatusId() {
 		return statusId;
 	}
-
 
 	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
 
-
 	public int getTypeId() {
 		return typeId;
 	}
 
-
 	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -169,7 +186,6 @@ public class Reimbursement {
 		return result;
 	}
 
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -188,13 +204,6 @@ public class Reimbursement {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		/*
-		 * if (receipt == null) {
-			if (other.receipt != null)
-				return false;
-		} else if (!receipt.equals(other.receipt))
-			return false;
-		*/
 		if (reimbId != other.reimbId)
 			return false;
 		if (resolved == null) {

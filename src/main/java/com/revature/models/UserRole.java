@@ -1,8 +1,27 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="user_roles")
 public class UserRole {
 	
-	private int roleId;
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="user_role_id", referencedColumnName="user_role_id",nullable=false)
+	private int uRoleId;
+	
+	@Column(name="user_role", nullable=false)
 	private String uRole;
 	
 	public UserRole() {
@@ -11,7 +30,7 @@ public class UserRole {
 
 	public UserRole(int roleId, String uRole) {
 		super();
-		this.roleId = roleId;
+		this.uRoleId = roleId;
 		this.uRole = uRole;
 	}
 
@@ -21,11 +40,11 @@ public class UserRole {
 	}
 
 	public int getRoleId() {
-		return roleId;
+		return uRoleId;
 	}
 
 	public void setRoleId(int roleId) {
-		this.roleId = roleId;
+		this.uRoleId = roleId;
 	}
 
 	public String getuRole() {
@@ -40,7 +59,7 @@ public class UserRole {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + roleId;
+		result = prime * result + uRoleId;
 		result = prime * result + ((uRole == null) ? 0 : uRole.hashCode());
 		return result;
 	}
@@ -54,7 +73,7 @@ public class UserRole {
 		if (getClass() != obj.getClass())
 			return false;
 		UserRole other = (UserRole) obj;
-		if (roleId != other.roleId)
+		if (uRoleId != other.uRoleId)
 			return false;
 		if (uRole == null) {
 			if (other.uRole != null)
@@ -66,6 +85,6 @@ public class UserRole {
 
 	@Override
 	public String toString() {
-		return "UserRole [roleId=" + roleId + ", uRole=" + uRole + "]";
+		return "UserRole [roleId=" + uRoleId + ", uRole=" + uRole + "]";
 	}
 }

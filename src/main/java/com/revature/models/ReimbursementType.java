@@ -1,8 +1,23 @@
 package com.revature.models;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+
 public class ReimbursementType {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="type_id", referencedColumnName="type_id", nullable=false)
 	private int typeId;
+	
+	@Column(name="type", nullable=false)
 	private String type;
 	
 	public ReimbursementType() {

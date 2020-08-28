@@ -1,13 +1,45 @@
 package com.revature.models;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
+import javax.persistence.Table;
+
+@Entity
+@Table(name="users")
 public class User {
 	
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name="user_id", nullable=false)
 	private int UserId;
+	
+	@Column(name="username", nullable=false, unique=true)
 	private String username;
+	
+	@Column(name="password", nullable=false)
 	private String password;
+	
+	@Column(name="first_name", nullable=false)
 	private String firstName;
+	
+	@Column(name="last_name", nullable=false)
 	private String lastName;
+	
+	@Column(name="email", nullable=false, unique=true)
 	private String email;
+	
+	@OneToOne(cascade = CascadeType.ALL, fetch=FetchType.EAGER)
+	@JoinColumn(name="user_role_id", referencedColumnName = "user_role_id", nullable=false)
 	private int UserRoleId;
 	
 	
@@ -15,9 +47,9 @@ public class User {
 	public User() {
 		super();
 	}
-
-	//full args constructor
-	public User(int userId, String username, String password, String firstName, String lastName, String email, int userRoleId) {
+	
+	public User(int userId, String username, String password, String firstName, String lastName, String email,
+			int userRoleId, List<Reimbursement> reimbList) {
 		super();
 		UserId = userId;
 		this.username = username;
@@ -27,9 +59,9 @@ public class User {
 		this.email = email;
 		UserRoleId = userRoleId;
 	}
-
-	//full args minus UserId (SERIAL in dB)
-	public User(String username, String password, String firstName, String lastName, String email, int userRoleId) {
+	
+	public User(String username, String password, String firstName, String lastName, String email, int userRoleId,
+			List<Reimbursement> reimbList) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -95,6 +127,7 @@ public class User {
 		UserRoleId = userRoleId;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -153,6 +186,7 @@ public class User {
 	@Override
 	public String toString() {
 		return "User [UserId=" + UserId + ", username=" + username + ", password=" + password + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email + ", UserRoleId=" + UserRoleId + "]";
-	}	
+				+ firstName + ", lastName=" + lastName + ", email=" + email + ", UserRoleId=" + UserRoleId
+				+ "]";
+	}
 }

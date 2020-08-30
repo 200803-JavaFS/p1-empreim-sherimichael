@@ -8,7 +8,8 @@ public interface UserDaoIf {
 		
 	public List<User> findAll();
 	public User findByUserId(int id);
-	public void addUser(User u);	
-	public void updateUser(User u);
+	public User findByUsername(String username);
+	public boolean addUser(User u);	
+	public boolean updateUser(User u);
 
 }

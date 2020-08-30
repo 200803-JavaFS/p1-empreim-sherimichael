@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,8 +14,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="reimbursement")
-public class Reimbursement {
+@Table(name="reimbursement", schema = "project1")
+public class Reimbursement implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -33,20 +37,20 @@ public class Reimbursement {
 	private String description;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="author", referencedColumnName = "user_id")
+	@JoinColumn(name="author")
 	private User author;
 	
-	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="resolver", referencedColumnName = "user_id")
+	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="resolver")
 	private User resolver;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="status_id", referencedColumnName = "status_id")
-	private int statusId;
+	@JoinColumn(name="status_id", nullable=false)
+	private ReimbursementStatus statusId;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
-	@JoinColumn(name="type_id", referencedColumnName = "type_id")
-	private int typeId;
+	@JoinColumn(name="type_id", nullable=false)
+	private ReimbursementType typeId;
 	
 	public Reimbursement() {
 		super();
@@ -54,7 +58,7 @@ public class Reimbursement {
 
 
 	public Reimbursement(int reimbId, double amount, String submitted, String resolved, String description,
-		 User author, User resolver, int statusId, int typeId) {
+		 User author, User resolver, ReimbursementStatus statusId, ReimbursementType typeId) {
 		super();
 		this.reimbId = reimbId;
 		this.amount = amount;
@@ -69,13 +73,12 @@ public class Reimbursement {
 
 
 	public Reimbursement(double amount, String submitted, String resolved, String description,
-			User author, User resolver, int statusId, int typeId) {
+			User author, User resolver, ReimbursementStatus statusId, ReimbursementType typeId) {
 		super();
 		this.amount = amount;
 		this.submitted = submitted;
 		this.resolved = resolved;
 		this.description = description;
-		//this.receipt = receipt;
 		this.author = author;
 		this.resolver = resolver;
 		this.statusId = statusId;
@@ -148,19 +151,19 @@ public class Reimbursement {
 		this.resolver = resolver;
 	}
 
-	public int getStatusId() {
+	public ReimbursementStatus getStatusId() {
 		return statusId;
 	}
 
-	public void setStatusId(int statusId) {
+	public void setStatusId(ReimbursementStatus statusId) {
 		this.statusId = statusId;
 	}
 
-	public int getTypeId() {
+	public ReimbursementType getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(int typeId) {
+	public void setTypeId(ReimbursementType typeId) {
 		this.typeId = typeId;
 	}
 	
@@ -176,9 +179,9 @@ public class Reimbursement {
 		result = prime * result + reimbId;
 		result = prime * result + ((resolved == null) ? 0 : resolved.hashCode());
 		result = prime * result + ((resolver == null) ? 0 : resolver.hashCode());
-		result = prime * result + statusId;
+		result = prime * result + ((statusId == null) ? 0 : statusId.hashCode());
 		result = prime * result + ((submitted == null) ? 0 : submitted.hashCode());
-		result = prime * result + typeId;
+		result = prime * result + ((typeId == null) ? 0 : typeId.hashCode());
 		return result;
 	}
 

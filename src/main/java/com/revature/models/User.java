@@ -1,5 +1,7 @@
 package com.revature.models;
 
+import java.io.Serializable;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,12 +11,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name="users")
-public class User {
+@Table(name="users", schema = "project1")
+public class User implements Serializable{
+	
+	private static final long serialVersionUID = 1L;
 	
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -37,8 +40,8 @@ public class User {
 	private String email;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="user_role_id", referencedColumnName = "user_role_id", nullable=false)
-	private int userRoleId;
+	@JoinColumn(name="user_role", nullable=false)
+	private UserRole userRoleId;
 	
 	
 	//no args constructor
@@ -47,7 +50,7 @@ public class User {
 	}
 	
 	public User(int userId, String username, String password, String firstName, String lastName, String email,
-			int userRoleId) {
+			UserRole userRoleId) {
 		super();
 		this.userId = userId;
 		this.username = username;
@@ -58,7 +61,7 @@ public class User {
 		this.userRoleId = userRoleId;
 	}
 	
-	public User(String username, String password, String firstName, String lastName, String email, int userRoleId) {
+	public User(String username, String password, String firstName, String lastName, String email, UserRole userRoleId) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -73,7 +76,7 @@ public class User {
 	}
 
 	public void setUserId(int userId) {
-		userId = userId;
+		this.userId = userId;
 	}
 
 	public String getUsername() {
@@ -116,11 +119,11 @@ public class User {
 		this.email = email;
 	}
 
-	public int getUserRoleId() {
+	public UserRole getUserRoleId() {
 		return userRoleId;
 	}
 
-	public void setUserRoleId(int userRoleId) {
+	public void setUserRoleId(UserRole userRoleId) {
 		this.userRoleId = userRoleId;
 	}
 
@@ -130,7 +133,7 @@ public class User {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + userId;
-		result = prime * result + userRoleId;
+		result = prime * result + ((userRoleId == null) ? 0 : userRoleId.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((firstName == null) ? 0 : firstName.hashCode());
 		result = prime * result + ((lastName == null) ? 0 : lastName.hashCode());

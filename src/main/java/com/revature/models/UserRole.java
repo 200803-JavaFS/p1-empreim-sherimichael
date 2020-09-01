@@ -2,12 +2,9 @@ package com.revature.models;
 
 
 import java.io.Serializable;
-import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -18,16 +15,12 @@ public class UserRole implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_role_id", nullable=false)
 	private int uRoleId;
 	
 	@Column(name="user_role", nullable=false)
 	private String uRole;
-	
-	//@OneToMany(mappedBy="userRoleId")
-	//private List<User> uList;
-	
+
 	public UserRole() {
 		super();
 	}

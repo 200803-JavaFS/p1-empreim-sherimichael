@@ -14,11 +14,17 @@ public class UserServices {
 		return uDao.findAll();
 	}
 	public User findByUserId(int id) {
-		return uDao.findByUserId(id);
+		return uDao.findByUId(id);
 	}
+		
+	public User findByUsername(String username) {
+		return uDao.findByUsername(username);
+	}
+
 	public boolean addUser(User u) {
 		return uDao.addUser(u);
 	}
+	
 	public boolean updateUser(User u) {
 		return uDao.updateUser(u);
 	}

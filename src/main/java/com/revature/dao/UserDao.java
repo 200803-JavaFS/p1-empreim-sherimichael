@@ -8,7 +8,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.User;
-import com.revature.models.UserRole;
 import com.revature.utils.HibernateUtil;
 
 public class UserDao implements UserDaoIf {
@@ -20,7 +19,7 @@ public class UserDao implements UserDaoIf {
 	}
 	
 	public List<User> findAll() {
-		//opening session to perform op on dB
+		log.info("@findAll in UserDao");
 		Session ses = HibernateUtil.getSession();
 		
 		//create a query
@@ -30,22 +29,34 @@ public class UserDao implements UserDaoIf {
 		return userList;
 	}
 	
-	public User findByUserId(int id) {
+	public User findByUId(int id) {
+		log.info("@afindById in UserDao");
 		Session ses = HibernateUtil.getSession();
 		
-		User u = ses.get(User.class, id);
+		try {
+			User u = ses.get(User.class, id);
+			return u;
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
 		
-		return u;
+		return null;
 	}
 	
 	@Override
 	public User findByUsername(String username) {
+		log.info("@findByUsername in UserDao");
 		Session ses = HibernateUtil.getSession();
-		@SuppressWarnings("unchecked")
-		List<User> uList = ses.createQuery("FROM User WHERE username=" + username).list();                  
-		User u = uList.get(0);   
-		//just lists the first one if there are more than one                  
-		return u;    		
+		try {
+			User us = (User) ses.createQuery("FROM User WHERE username =" + username,User.class);
+			return us;
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		
+		return null;	
 	}
 	
 	public boolean addUser(User u) {
@@ -61,20 +72,8 @@ public class UserDao implements UserDaoIf {
 		}
 	}
 	
-	public boolean addUserRole(UserRole uRole) {
-		log.info("@addUserRole in UserDao");
-		Session ses = HibernateUtil.getSession();
-	
-		try {
-			ses.save(uRole);
-			return true;
-		}catch (HibernateException e) {
-			e.printStackTrace();
-			return false;
-		}
-	}
-	
 	public boolean updateUser(User u) {
+		log.info("@updateUser in UserDao");
 		Session ses = HibernateUtil.getSession();
 		
 		try {

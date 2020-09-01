@@ -7,58 +7,52 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
+import com.revature.controllers.LoginController;
+import com.revature.controllers.ReimbursementController;
+import com.revature.controllers.UserController;
+
 //import com.revature.controller.ReimbController;
 //import com.revature.controller.UserController;
 
 
 public class MasterServlet extends HttpServlet{
+	
+	public static final Logger logger = LogManager.getLogger(MasterServlet.class);
 
 	private static final long serialVersionUID = 1L;
-	//private static UserController uc = new UserController();
-	//private static ReimbController rc = new ReimbController();
-
+	private static UserController uc = new UserController();
+	private static ReimbursementController rc = new ReimbursementController();
+	private static LoginController lc = new LoginController();
 	
 	public MasterServlet() {
 		super();
 	}
 	
 	@Override
-	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-	
+	protected void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException{
+		
 		res.setContentType("application/json");
+		
 		res.setStatus(404);
-		
-		final String URI= req.getRequestURI().replace("/project1/", "");
-		String[] portions = URI.split("/");
-		
-
-		System.out.println(Arrays.toString(portions));
-		System.out.println("portions[0]:"+ portions[0]);
-		try {
-			System.out.println("@try in doGet() in MasterServlet");
-			switch(portions[0]) {
-				case "login":
-					if (req.getMethod().equals("POST")) {
-						//uc.login(req, res);
-					}
-//				case "employeeSuccess":
-//					if (req.getMethod().equals("POST")) {
-//						uc.display(req, res);
-//					}
-			}
-					
-		}catch (NumberFormatException e ) {
-			e.printStackTrace();
-			res.getWriter().print("Please enter an id that is an integer.");
-			res.setStatus(400);
-		}
-	
 	}
-	
-	
+		
 	@Override
-	protected void doPost(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-	
-	}
-
+	protected void doPost (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		final String uri = req.getRequestURI().replace("/project-1/", "");	
+			
+		switch(uri.toLowerCase()) {
+			case "login":
+				logger.info("@login in MasterServletswitch");
+				lc.login(req, res);
+				break;
+			case "register":
+				logger.info("@register in MasterServletswitch");
+				//lc.register(req, res);
+				break;
+				
+			}
+		}
 }

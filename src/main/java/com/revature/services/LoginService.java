@@ -9,13 +9,16 @@ public class LoginService {
     UserDao uDao = new UserDao();     
     
     public boolean login(LoginDTO l) {        
-    	
-    	User u = uDao.findByUsername(l.username);         
-    	
-    	if((u!=null) && l.password.equals(u.getPassword())) {            
-    		return true;         
-    	} else {         
-    	return false;      
-    	}
-    }
+    	User u = uDao.findByUsername(l.username);
+		StringBuilder tempPassword = new StringBuilder();
+		tempPassword.append(l.password.hashCode());
+		String hashPassword = tempPassword.toString();
+		
+		if((u!=null) && hashPassword.equals(u.getPassword())) {
+			return true;
+		
+		}else {
+		return false; 
+		}
+	}
 }

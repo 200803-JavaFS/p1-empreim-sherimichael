@@ -1,6 +1,7 @@
 package com.revature.models;
 
 import java.io.Serializable;
+import java.sql.Timestamp;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -28,10 +29,10 @@ public class Reimbursement implements Serializable{
 	private double amount;
 	
 	@Column(name="submitted", nullable=false)
-	private String submitted;
+	private Timestamp submitted;
 	
 	@Column(name="resolved")
-	private String resolved;
+	private Timestamp resolved;
 	
 	@Column(name="description")
 	private String description;
@@ -57,7 +58,7 @@ public class Reimbursement implements Serializable{
 	}
 
 
-	public Reimbursement(int reimbId, double amount, String submitted, String resolved, String description,
+	public Reimbursement(int reimbId, double amount, Timestamp submitted, Timestamp resolved, String description,
 		 User author, User resolver, ReimbursementStatus statusId, ReimbursementType typeId) {
 		super();
 		this.reimbId = reimbId;
@@ -72,7 +73,7 @@ public class Reimbursement implements Serializable{
 	}
 
 
-	public Reimbursement(double amount, String submitted, String resolved, String description,
+	public Reimbursement(double amount, Timestamp submitted, Timestamp resolved, String description,
 			User author, User resolver, ReimbursementStatus statusId, ReimbursementType typeId) {
 		super();
 		this.amount = amount;
@@ -106,22 +107,22 @@ public class Reimbursement implements Serializable{
 	}
 
 
-	public String getSubmitted() {
+	public Timestamp getSubmitted() {
 		return submitted;
 	}
 
 
-	public void setSubmitted(String submitted) {
+	public void setSubmitted(Timestamp submitted) {
 		this.submitted = submitted;
 	}
 
 
-	public String getResolved() {
+	public Timestamp getResolved() {
 		return resolved;
 	}
 
 
-	public void setResolved(String resolved) {
+	public void setResolved(Timestamp resolved) {
 		this.resolved = resolved;
 	}
 

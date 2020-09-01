@@ -35,8 +35,87 @@ public class MasterServlet extends HttpServlet{
 	protected void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException{
 		
 		res.setContentType("application/json");
-		
+		// By default tomcat will send back a successful status code if it finds servlet method.
+		// Because all requests will hit this method, we are defaulting to not found and
+		// will override for success requests.
 		res.setStatus(404);
+
+		final String URI = req.getRequestURI().replace("/project1/", "");
+
+		String[] portions = URI.split("/");
+
+		System.out.println(Arrays.toString(portions));
+
+		try {
+			switch (portions[0]) {
+			case "Users":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("GET")) {
+						if (portions.length == 2) {
+							int userId = Integer.parseInt(portions[1]);
+							uc.getUById(res, userId);
+						} else if (portions.length == 1) {
+							uc.getAllU(res);
+						}
+					} else if (req.getMethod().equals("POST")) {
+						uc.addU(req, res);
+					}
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
+			case "UserRoles":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("GET")) {
+						if (portions.length == 2) {
+							int userRolesId = Integer.parseInt(portions[1]);
+							//uc.getURole(res, userRolesId);
+						} 
+					} else if (req.getMethod().equals("POST")) {
+						//uc.addURoles(req, res);
+					}
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
+			case "Reimbursement":
+				if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+					if (req.getMethod().equals("GET")) {
+						if (portions.length == 2) {
+							int reimbId = Integer.parseInt(portions[1]);
+							rc.getRById(res, reimbId);
+						} else if (portions.length == 1) {
+							rc.getAll(res);
+						}
+					} else if (req.getMethod().equals("POST")) {
+						rc.addR(req, res);
+					}
+				
+				} else {
+					res.setStatus(403);
+					res.getWriter().println("You must be logged in to do that!");
+				}
+				break;
+				
+			case "Login":
+				lc.login(req, res);
+				break;
+				
+			case "Logout":
+				lc.logout(req, res);
+				break;
+			}
+
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			res.getWriter().print("The user id you provided is not an integer");
+			res.setStatus(400);
+		}
+
 	}
 		
 	@Override
@@ -53,6 +132,6 @@ public class MasterServlet extends HttpServlet{
 				//lc.register(req, res);
 				break;
 				
-			}
 		}
+	}
 }

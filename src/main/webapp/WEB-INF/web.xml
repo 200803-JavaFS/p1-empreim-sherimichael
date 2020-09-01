@@ -13,7 +13,7 @@
     <description></description>
     <display-name>MasterServlet</display-name>
     <servlet-name>MasterServlet</servlet-name>
-    <servlet-class>com.revature.web.Servlet</servlet-class>
+    <servlet-class>com.revature.web.MasterServlet</servlet-class>
   </servlet>
   <servlet-mapping>
     <servlet-name>MasterServlet</servlet-name>

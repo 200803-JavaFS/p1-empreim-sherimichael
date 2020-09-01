@@ -18,6 +18,7 @@ public class UserDao implements UserDaoIf {
 		super();
 	}
 	
+	@Override
 	public List<User> findAll() {
 		log.info("@findAll in UserDao");
 		Session ses = HibernateUtil.getSession();
@@ -29,6 +30,7 @@ public class UserDao implements UserDaoIf {
 		return userList;
 	}
 	
+	@Override
 	public User findByUId(int id) {
 		log.info("@afindById in UserDao");
 		Session ses = HibernateUtil.getSession();
@@ -49,7 +51,7 @@ public class UserDao implements UserDaoIf {
 		log.info("@findByUsername in UserDao");
 		Session ses = HibernateUtil.getSession();
 		try {
-			User us = (User) ses.createQuery("FROM User WHERE username =" + username,User.class);
+			User us = (User) ses.createQuery("from User where username =" + username,User.class);
 			return us;
 		}
 		catch(HibernateException e) {

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Employee Form for Reimbursement Requests</title>
+</head>
+<body>
+	<div id="employee">
+        <h2 id = "welcome-row" class="row justify-content-center align-items-center text-white">Squirrel Dog Enterprises</h2>
+        <h2 id = "welcome2-row" class="row justify-content-center align-items-center text-white">Empployee Reimbursement Request Form</h2>
+        <div class="container">
+            <div id="employee-row" class="row justify-content-center align-items-center">
+                <div id="employee-column" class="col-md-6">
+                    <div id="employee-box" class="col-md-12">
+                        <form id="employee-form" class="form" action="" method="post">
+                            <h3 class="text-center text-info">Please complete the following:</h3>
+                            <div class="form-group">
+								<label for="email" class="text-info">Email:</label><br> <input
+								 type="email" name="author" id="author" class="form-control">
+							</div>
+                            <div class="form-group">
+								<label for="amount" class="text-info">Reimbursement Amount Requested: $</label><br> 
+								<input type="number" name="amount"  min="0" value="0" step=".01">				i
+                            </div>
+							<div class="dropdown">
+  									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    									Select Reimbursement Type
+ 									</button>
+  									<div class="dropdown-menu">
+    									<a class="dropdown-item" href="#">Lodging</a>
+   										<a class="dropdown-item" href="#">Travel</a>
+    									<a class="dropdown-item" href="#">Food</a>
+    									<a class="dropdown-item" href="#">Other</a>
+  									</div>
+								</div>
+							<div class="form-group">
+    							<label for="textarea">Brief description for Request:</label>
+    							<textarea class="form-control" id="textarea" rows="3"></textarea>
+ 								</div>
+							<div class="form-group">
+                                <input type="submit" name="submit" style="width:100%" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+		<!-- <div id="login">
+			<h3 class="text-center text-white pt-5">Employee Reimbursement Request</h3>
+			<div class="container">
+				<div id="employee-row"
+					class="row justify-content-center align-items-center">
+					<div id="employee-column" class="col-md-6">
+						<div id="birdog-box" class="col-md-12">
+							<form id="employee-form" class="form" action="" method="post">
+								<h3 class="text-center text-info">Squirrel Dog Enterprises</h3>
+								<h4 class="text-center text-info">Employee Reimbursement Requests</h4>
+								<div class="form-group">
+									<label for="author" class="text-info">Name:</label><br> <input
+										type="text" name="author" id="author" class="form-control">
+								</div>
+								<div class="form-group">
+									<label for="amount" class="text-info">Reimbursement
+										Amount Requested: $</label><br> <input type="number" name="amount"  min="0" value="0" step=".01"
+										id="amount" class="form-control">
+								</div>
+								<div class="dropdown">
+  									<button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+    									Reimbursement Type
+ 									</button>
+  									<div class="dropdown-menu">
+    									<a class="dropdown-item" href="#">Link 1</a>
+   										<a class="dropdown-item" href="#">Link 2</a>
+    									<a class="dropdown-item" href="#">Link 3</a>
+    									<a class="dropdown-item" href="#">Link 3</a>
+  									</div>
+								</div>
+								<div class="form-group">
+    								<label for="textarea">Brief description of Request:</label>
+    								<textarea class="form-control" id="textarea" rows="3"></textarea>
+ 								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div> -->
+</body>
+</html>

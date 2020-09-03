@@ -32,46 +32,30 @@ async function loginFunc() {
 
     if (resp.status == 200) {
         document.getElementById("login-row").innerText = "You have successfully logged in.";
-        //goToStaff();
+        let data = await resp.json();
+        let uRId = data.userRoleId;
+        if (uRId == 1) {
+            console.log("employee page");
+            //window.location.href = 'employee.html'; https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
+
+        } else if (uRole == 2) {
+            console.log("finance manager page");
+            //window.location.href = 'financemanager.html'; https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
+        }
 
     } else {
-        //resetLogin();
-        document.getElementById("login-row").innerText = "Batman";
+        document.getElementById("login-row").innerText = "Oops, something went wrong. Please try logging in again.";
     }
+    /*
+    } else {
+        //resetLogin();
+        document.getElementById("login-row").innerText = "Holy Cow Batman! Please try logging in again.";
+    }
+    */
 
     function resetLogin() {
         console.log("@resetLogin");
         document.getElementById("login-row").innerText = "Oops, something went wrong. Please try logging in again.";
         //document.getElementById("loginbtn").reset();
     }
-
-    async function goToStaff() {
-        console.log("@goToStaff in reimbursement.js");
-        let resp = await fetch(url + "allOk", {
-            method: 'GET',
-            body: JSON.stringify(user),
-            credentials: "include"
-        })
-    }
-    console.log(resp.status);
-    /*
-
-    if (resp.status === 200) {
-        let result = await resp.json();
-        let userId = result.userId;
-        sessionStorage.setItem("userId", userId);
-        let uRole = result.userRoleId.roleId;
-
-        if (uRole == 1) {
-            console.log("employee page");
-
-        } else if (uRole == 2) {
-            console.log("finance manager page");
-
-        }
-
-    } else {
-        document.getElementById("login-row").innerText = "Oops, something went wrong. Please try logging in again.";
-    }
-    */
 }

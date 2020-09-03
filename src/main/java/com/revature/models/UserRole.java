@@ -5,6 +5,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
@@ -15,6 +17,7 @@ public class UserRole implements Serializable{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="user_role_id", nullable=false)
 	private int uRoleId;
 	
@@ -44,11 +47,11 @@ public class UserRole implements Serializable{
 		this.uRoleId = roleId;
 	}
 
-	public String getuRole() {
+	public String getURole() {
 		return uRole;
 	}
 
-	public void setuRole(String uRole) {
+	public void setURole(String uRole) {
 		this.uRole = uRole;
 	}
 

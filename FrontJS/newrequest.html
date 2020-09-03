@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" id="bootstrap-css">
+    <link rel="stylesheet" href="style.css">
+    <title>Squirrel Dog Enterprises Employee Reimbursement Request</title>
+
+</head>
+
+<body>
+    <div id="login">
+        <h3 id="welcome-row" class="row justify-content-center align-items-center text-white">Squirrel Dog Enterprises</h3>
+        <h3 id="welcome2-row" class="row justify-content-center align-items-center text-white">Employee Reimbursement Request Form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <h5 class="text-center text-info">Please complete the following:</h5>
+                            <div class="input-group form-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info">Email</span>
+                                </div>
+                                <input type="email" class="form-control">
+                            </div>
+                            <div class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text text-info">Amount Requested: $</span>
+                                </div>
+                                <input type="number" step=.01 class="form-control">
+                            </div>
+                            <div class="type-dropdown form-group dropdown">
+                                <button type="button" class="btn btn-info btn-md dropdown-toggle" data-toggle="dropdown">
+    									Select Reimbursement Type
+ 									</button>
+                                <div id="options" class="dropdown-menu">
+                                    <button class="dropdown-item" type="button">Lodging</button>
+                                    <button class="dropdown-item" type="button">Travel</button>
+                                    <button class="dropdown-item" type="button">Food</button>
+                                    <button class="dropdown-item" type="button">Other</button>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="textarea" class="text-info">Brief description for Request:</label>
+                                <textarea class="form-control" id="textarea" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input type="submit" name="submit" style="width:100%" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        $(function() {
+            $(document).ready(function() {
+                $(".dropdown-menu").click(function() {
+                    $("dropdown-items button").text($(this).text());
+                });
+            });
+        });
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="reimbursement.js"></script>
+
+</html>

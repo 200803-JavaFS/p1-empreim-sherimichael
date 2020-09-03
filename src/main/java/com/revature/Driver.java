@@ -49,8 +49,8 @@ public class Driver {
 			sb.append(p.hashCode());
 			String hashp = sb.toString();
 			
-			UserRole ur1 = new UserRole(1, "Employee");
-			UserRole ur2 = new UserRole(2, "Finance Manager");
+			UserRole ur1 = new UserRole("Employee");
+			UserRole ur2 = new UserRole("Finance Manager");
 			uRDao.addURole(ur1);
 			uRDao.addURole(ur2);
 			User u1 = new User("batman", hashp, "Bruce", "Wayne", "wayne@email.com", ur1);	
@@ -62,14 +62,25 @@ public class Driver {
 			System.out.println(r1);
 			Reimbursement r2 = new Reimbursement();
 			List<Reimbursement> rList = Arrays.asList(r1, r2);
-			ReimbursementStatus rs = new ReimbursementStatus(1, "pending", rList);
-			ReimbursementType rt = new ReimbursementType(2, "travel", rList);
+			ReimbursementStatus rs = new ReimbursementStatus("pending", rList);
+			ReimbursementStatus rs2 = new ReimbursementStatus("approved", rList);
+			ReimbursementStatus rs3 = new ReimbursementStatus("denied", rList);
+			ReimbursementType rt = new ReimbursementType("travel", rList);
+			ReimbursementType rt2 = new ReimbursementType("food", rList);
+			ReimbursementType rt3 = new ReimbursementType("lodging", rList);
+			ReimbursementType rt4 = new ReimbursementType("other", rList);
 			rSDao.addRStatus(rs);
 			rTDao.addRType(rt);
 			Date date = new Date();
 			Timestamp ts1 = new Timestamp(date.getTime());
 			Timestamp ts2 = new Timestamp(date.getTime());
-			Reimbursement r3 = new Reimbursement(27.56, ts1, ts2, "Client Mtg", u1, u2, rs, rt);
+			Reimbursement r3 = new Reimbursement(27.56, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs, rt2);
+			Reimbursement r4 = new Reimbursement(65.34, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs, rt3);
+			Reimbursement r5 = new Reimbursement(5.78, ts1, ts2, "Gas to pickup Supplies", u1, u2, rs, rt4);
+			Reimbursement r6 = new Reimbursement(100.00, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs, rt);
 			rDao.addReimbursement(r3);
+			rDao.addReimbursement(r4);
+			rDao.addReimbursement(r5);
+			rDao.addReimbursement(r6);
 		}
 }

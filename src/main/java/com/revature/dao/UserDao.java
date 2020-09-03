@@ -7,12 +7,15 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
+import com.revature.controllers.LoginController;
 import com.revature.models.User;
+import com.revature.models.UserRole;
 import com.revature.utils.HibernateUtil;
 
 public class UserDao implements UserDaoIf {
 	
 	private static final Logger log = LogManager.getLogger(UserDao.class);
+	private static LoginController lc = new LoginController();
 	
 	public UserDao() {
 		super();
@@ -51,8 +54,10 @@ public class UserDao implements UserDaoIf {
 		log.info("@findByUsername in UserDao");
 		Session ses = HibernateUtil.getSession();
 		try {
-			User us = (User) ses.createQuery("from User where username =" + username,User.class);
-			return us;
+			List<User> us = ses.createQuery("from User where username ='" + username+"'",User.class).list();
+			System.out.println("@findByUsername in UDao List<User> us = " + us);
+			System.out.println("@findByUsername in UDao username = " + username);
+			return us.get(0);
 		}
 		catch(HibernateException e) {
 			e.printStackTrace();

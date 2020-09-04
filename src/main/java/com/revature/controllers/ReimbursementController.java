@@ -46,12 +46,21 @@ public class ReimbursementController {
 		res.getWriter().println(json);
 	}
 	
-	public void getRByStatus(HttpServletResponse res, String status) throws IOException {
+	public void getRByStatus(HttpServletResponse res, int statusId) throws IOException {
 		log.info("@getRByStatus in ReimbursementController");
 		
-		List<Reimbursement> allRStatus = rs.findByRStatus(status);
+		List<Reimbursement> allRStatus = rs.findByRStatus(statusId);
 		
 		res.getWriter().println(om.writeValueAsString(allRStatus));
+		res.setStatus(200);
+	}
+	
+	public void getRByAuthorStatus(HttpServletResponse res, int author, int statusId) throws IOException{
+		log.info("@getRByAuthorStatus in ReimbursementController");
+		
+		List<Reimbursement> userStatus = rs.findByUserStatus(author, statusId);
+		
+		res.getWriter().println(om.writeValueAsString(userStatus));
 		res.setStatus(200);
 	}
 	

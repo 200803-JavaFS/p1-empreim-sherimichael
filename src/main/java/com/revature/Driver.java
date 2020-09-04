@@ -69,18 +69,21 @@ public class Driver {
 			ReimbursementType rt2 = new ReimbursementType("food", rList);
 			ReimbursementType rt3 = new ReimbursementType("lodging", rList);
 			ReimbursementType rt4 = new ReimbursementType("other", rList);
+			ReimbursementType rt5 = new ReimbursementType("other", rList);
 			rSDao.addRStatus(rs);
 			rTDao.addRType(rt);
 			Date date = new Date();
 			Timestamp ts1 = new Timestamp(date.getTime());
 			Timestamp ts2 = new Timestamp(date.getTime());
-			Reimbursement r3 = new Reimbursement(27.56, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs, rt2);
-			Reimbursement r4 = new Reimbursement(65.34, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs, rt3);
-			Reimbursement r5 = new Reimbursement(5.78, ts1, ts2, "Gas to pickup Supplies", u1, u2, rs, rt4);
-			Reimbursement r6 = new Reimbursement(100.00, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs, rt);
+			Reimbursement r3 = new Reimbursement(27.56, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs2, rt2);
+			Reimbursement r4 = new Reimbursement(65.34, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs3, rt3);
+			Reimbursement r5 = new Reimbursement(5.78, ts1, ts2, "Gas to pickup Supplies", u1, u2, rs2, rt4);
+			Reimbursement r6 = new Reimbursement(100.00, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs2, rt);
+			Reimbursement r7 = new Reimbursement(20.00, ts1, null , "Client Mtg in Omaha", u1, u2, rs, rt5);
 			rDao.addReimbursement(r3);
 			rDao.addReimbursement(r4);
 			rDao.addReimbursement(r5);
 			rDao.addReimbursement(r6);
+			rDao.addReimbursement(r7);
 		}
 }

@@ -28,10 +28,11 @@ public class Reimbursement implements Serializable{
 	@Column(name="amount", nullable=false)
 	private double amount;
 	
+	
 	@Column(name="submitted", nullable=false)
 	private Timestamp submitted;
 	
-	@Column(name="resolved")
+	@Column(name="resolved", nullable=true)
 	private Timestamp resolved;
 	
 	@Column(name="description")
@@ -42,7 +43,7 @@ public class Reimbursement implements Serializable{
 	private User author;
 	
 	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="resolver")
+	@JoinColumn(name="resolver", nullable=true)
 	private User resolver;
 	
 	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)

@@ -16,11 +16,14 @@ public class ReimbursementServices {
 	public Reimbursement findByRId(int id) {
 		return rDao.findByRId(id);
 	}
-	public List<Reimbursement> findByUser(String email) {
-		return rDao.findByUser(email);
+	public List<Reimbursement> findByUser(int author) {
+		return rDao.findByUser(author);
 	}
-	public List<Reimbursement> findByRStatus(String status) {
-		return rDao.findByRStatus(status);
+	public List<Reimbursement> findByRStatus(int statusId) {
+		return rDao.findByRStatus(statusId);
+	}
+	public List<Reimbursement> findByUserStatus(int author, int statusId) {
+		return rDao.findByUserStatus(author, statusId);
 	}
 	public boolean addReimbursement(Reimbursement addR) {
 		return rDao.addReimbursement(addR);

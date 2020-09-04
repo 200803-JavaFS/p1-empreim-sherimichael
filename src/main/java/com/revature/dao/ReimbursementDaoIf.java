@@ -8,8 +8,9 @@ public interface ReimbursementDaoIf {
 	
 	public List<Reimbursement> findAll();
 	public Reimbursement findByRId(int id);
-	public List<Reimbursement> findByUser(String email);
-	public List<Reimbursement> findByRStatus(String status);
+	public List<Reimbursement> findByUser(int author);
+	public List<Reimbursement> findByRStatus(int statusId);
+	public List<Reimbursement> findByUserStatus(int author, int statusId);
 	public boolean addReimbursement(Reimbursement addR);
 	public boolean updateReimbursement(Reimbursement updateR);
 	

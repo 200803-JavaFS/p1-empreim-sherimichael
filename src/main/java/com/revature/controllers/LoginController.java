@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.LoginDTO;
-import com.revature.models.User;
 import com.revature.services.LoginService;
 import com.revature.services.UserServices;
 
@@ -57,7 +56,6 @@ public class LoginController {
 				}			
 			}
 	}
-
 
 	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		HttpSession ses = req.getSession(false);

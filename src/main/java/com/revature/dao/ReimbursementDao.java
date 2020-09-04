@@ -45,11 +45,11 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		}
 		
 		@Override
-		public List<Reimbursement> findByRStatus(String status) {
+		public List<Reimbursement> findByRStatus(int statusId) {
 			Session ses = HibernateUtil.getSession();
 			
 			try {
-				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement WHERE status = " + status, Reimbursement.class).list();
+				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement WHERE statusId = " + statusId, Reimbursement.class).list();
 				return rList;
 			}
 			catch(HibernateException e) {
@@ -60,11 +60,30 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		}
 		
 		@Override
-		public List<Reimbursement> findByUser(String email) {
+		public List<Reimbursement> findByUser(int author) {
 			Session ses = HibernateUtil.getSession();
 			
 			try {
-				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement WHERE email = " + email, Reimbursement.class).list();
+				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement WHERE author = " + author, Reimbursement.class).list();
+				return rList;
+			}
+			catch(HibernateException e) {
+				e.printStackTrace();
+			}
+			
+			return null;
+		}
+		
+		@Override
+		public List<Reimbursement> findByUserStatus(int author, int statusId) {
+			Session ses = HibernateUtil.getSession();
+			
+			try {
+				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement as r"
+						+ "LEFT JOIN"
+						+ "ReimbursementStatus as rs"
+						+ "on r.statusID = rs.statusId"
+						+ "WHERE status = " + statusId, Reimbursement.class).list();
 				return rList;
 			}
 			catch(HibernateException e) {

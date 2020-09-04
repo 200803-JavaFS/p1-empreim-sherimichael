@@ -1,1 +1,48 @@
-/* Finance Managers can 1. view all closed reqs by employee 2. view all open reqs 3. view by employee 4. ap or den */
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" id="bootstrap-css">
+    <link rel="stylesheet" href="style.css">
+    <title>Squirrel Dog Enterprises</title>
+
+</head>
+
+<body>
+    <div id="login">
+        <h3 id="welcome-row" class="row justify-content-center align-items-center text-white">Finance Manager Portal</h3>
+        <h4 id="welcome-row" class="row justify-content-center align-items-center text-white">Reimbursement Requests</h4>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <div id="login-form" class="form" action="" method="post">
+                            <h5 class="text-center text-info">What would you like to do?</h5>
+                            <div class="type-dropdown form-group dropdown">
+                                <button type="button" class="btn btn-info btn-md dropdown-toggle" data-toggle="dropdown">
+    									Select Reimbursement Action
+ 									</button>
+                                <div id="options" class="dropdown-menu">
+                                    <button class="dropdown-item" type="button">View All Pending Requests</button>
+                                    <button class="dropdown-item" type="button">View Pending Requests by Employee</button>
+                                    <button class="dropdown-item" type="button">View Past Requests by Employee</button>
+                                    <button class="dropdown-item" type="button">Approve or Deny Pending Requests</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="reimbursement.js"></script>
+
+</html>

@@ -37,6 +37,46 @@ public class MasterServlet extends HttpServlet{
 	@Override
 	protected void doGet(HttpServletRequest req,HttpServletResponse res) throws ServletException,IOException{
 		log.info("@doGet in MasterServlet");
+		
+		/*
+		 * functionalities: view reimbursement requests all and by employee for (open(pending) and closed(resolved))
+		 */
+		res.setContentType("application/json");
+		
+		res.setStatus(404);//setting explicitly bc web container(tomcat) sets default status when sends req to servlet
+
+		final String URI = req.getRequestURI().replace("/project1/", "");
+
+		String[] portions = URI.split("/");
+
+		System.out.println(Arrays.toString(portions));
+		
+		if ((portions[0]).equals("request")) {
+			if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
+				if (portions.length == 2) {
+					int reimbId = Integer.parseInt(portions[1]);
+					rc.getRById(res, reimbId);
+				} else if (portions.length == 1) {
+					rc.getAll(res);
+				}
+			} else {
+				res.setStatus(403);
+				res.getWriter().println("You must be logged in to do that!");
+			}
+		} else {
+		res.setStatus(400);
+		}	 
+	}
+		
+
+	@Override
+	protected void doPost (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doGet(req,res);
+		
+		/*
+		 * functionalities: login, logout, & employees can submit new reimbursement requests
+		 */
+		
 		res.setContentType("application/json");
 		
 		res.setStatus(404);
@@ -46,39 +86,22 @@ public class MasterServlet extends HttpServlet{
 		String[] portions = URI.split("/");
 
 		System.out.println(Arrays.toString(portions));
-
+		
 		try {
 			switch (portions[0]) {
 			
 			case "login":
-				log.info("@login at MasterServletSwitch");
-				lc.login(req, res);
-				
-				
+				log.info("@login in doPost at MasterServletSwitch");
+				lc.login(req, res);	
 				break;
 				
 			case "newrequest":
-				log.info("@request at MasterServletSwitch");
-				rc.addR(req, res);
-				break;
-				
-			case "requests":
-				log.info("@request at MasterServletSwitch");
-				//rc.getRById(res, id);
-				break;
-			
-			case "allreqs":
-				log.info("@request at MasterServletSwitch");
-				//rc.getRById(res, id);
-				break;
-				
-			case "appden":
-				log.info("@request at MasterServletSwitch");
-				//rc.getRById(res, id);
+				log.info("@newrequest in doPost at MasterServletSwitch");
+				//lc.logout(req, res);
 				break;
 				
 			case "logout":
-				log.info("@logout at MasterServletSwitch");
+				log.info("@logout in doPost at MasterServletSwitch");
 				lc.logout(req, res);
 				break;
 			}
@@ -88,12 +111,33 @@ public class MasterServlet extends HttpServlet{
 			res.getWriter().print("You are requesting a page that does not exist.");
 			res.setStatus(400);
 		}
-
 	}
+	
+	@Override
+	protected void doPut (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+		doGet(req,res);
+		
+		/*
+		 * functionalities: finance managers can approve/deny pending requests by changing the status
+		 * status codes: 1==pending, 2==approved, 3==denied
+		 */
+		
+		res.setContentType("application/json");
+		
+		res.setStatus(400);
+
+		final String URI = req.getRequestURI().replace("/project1/", "");
+
+		String[] portions = URI.split("/");
+
+		System.out.println(Arrays.toString(portions));
+		
+		if (URI.equals("request")) {
+			log.info("@request in duPut at MasterServletSwitch");
+			//rc.method			
+		}
+		
 		
 
-	@Override
-	protected void doPost (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req,res);
 	}
 }

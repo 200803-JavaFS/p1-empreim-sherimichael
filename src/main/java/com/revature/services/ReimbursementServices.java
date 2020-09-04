@@ -5,6 +5,7 @@ import java.util.List;
 import com.revature.dao.ReimbursementDao;
 import com.revature.dao.ReimbursementDaoIf;
 import com.revature.models.Reimbursement;
+import com.revature.models.inputRDTO;
 
 public class ReimbursementServices {
 	
@@ -25,10 +26,10 @@ public class ReimbursementServices {
 	public List<Reimbursement> findByUserStatus(int author, int statusId) {
 		return rDao.findByUserStatus(author, statusId);
 	}
-	public boolean addReimbursement(Reimbursement addR) {
-		return rDao.addReimbursement(addR);
+	public boolean addReimbursement(inputRDTO addR, int userId) {
+		return rDao.addReimbursement(addR, userId);
 	}
-	public boolean updateReimbursement(Reimbursement updateR) {
+	public boolean updateReimbursement(inputRDTO updateR) {
 		return rDao.addReimbursement(updateR);
 	}
 }

@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.UserDao;
 import com.revature.models.Reimbursement;
+import com.revature.models.inputRDTO;
 import com.revature.services.ReimbursementServices;
 
 public class ReimbursementController {
@@ -80,9 +81,9 @@ public class ReimbursementController {
 		
 		String body = new String(sb);
 		
-		Reimbursement r = om.readValue(body, Reimbursement.class);
-		
-		if(rs.addReimbursement(r)) {
+		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
+		Integer uId = (Integer) req.getSession().getAttribute("userId");
+		if(rs.addReimbursement(rDTO, uId.intValue())) {
 			res.setStatus(201);
 			res.getWriter().println("Reimbursement Request Added");
 		}

@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.Reimbursement;
+import com.revature.models.inputRDTO;
 import com.revature.utils.HibernateUtil;
 
 public class ReimbursementDao implements ReimbursementDaoIf {
@@ -94,7 +95,7 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		}
 		
 		@Override
-		public boolean addReimbursement(Reimbursement reimbursement) {
+		public boolean addReimbursement(inputRDTO reimbursement, int uId) {
 			Session ses = HibernateUtil.getSession();
 			
 			try {
@@ -108,7 +109,7 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		}
 		
 		@Override
-		public boolean updateReimbursement(Reimbursement r) {
+		public boolean updateReimbursement(inputRDTO r) {
 			Session ses = HibernateUtil.getSession();
 			try {
 				ses.merge(r);

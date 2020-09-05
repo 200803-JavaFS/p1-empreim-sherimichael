@@ -6,13 +6,14 @@ const url = "http://localhost:8080/project1/"
 
 //Method = POST
 document.getElementById("loginbtn").addEventListener("click", loginFunc);
-//document.getElementById("submitnewrequest").addEventListener("click", loginFunc);
+//document.getElementById("submitnewrequest").onsubmit=addFunc() 
 //document.getElementById("logoutbtn").addEventListener("click", loginFunc);
 
 //Method = PUT
 //document.getElementById("changestatus").addEventListener("click", loginFunc);
 
 async function loginFunc() {
+    console.log("@loginFunc");
 
     let usern = document.getElementById("username").value;
     let userp = document.getElementById("password").value;
@@ -37,13 +38,11 @@ async function loginFunc() {
         let data = await resp.text();
         console.log(resp);
         let uRoleId = data;
-        //sessionStorage.setItem("uId", uId);
         sessionStorage.setItem("uRoleId", uRoleId);
         console.log(uRoleId);
-        //console.log(uId);
         if (uRoleId == 1) {
-            console.log("employee page");
-            location.href = 'employee.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
+            showEmployeeForm();
+            
 
         } else if (uRoleId == 2) {
             console.log("finance manager page");
@@ -51,6 +50,48 @@ async function loginFunc() {
         } else { console.log("Holy Cow, Batman!"); }
     } else {
         resetLogin();
+    }
+}
+
+function showEmployeeForm(){
+    console.log("@showEmployeeForm");
+    location.href = 'employee.html';
+    console.log("@employee.html");
+    let submitNew = document.getElementById("submitnewrequest");
+    submitNew.addEventListener("click", addFunc);
+}
+
+async function addFunc() {
+    console.log("in addFunc");
+    let amount = document.getElementById("amount").value;
+    let description = document.getElementById("description").value;
+    let tId = document.getElementById("type").value; //https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
+    var typeId = tId.options[tId.selectedIndex].value;
+    let author = uId;
+
+
+    let rReq = {
+        amount: amount,
+        description: description,
+        author: author,
+        statusId: 1,
+        typeId: typeId
+    }
+
+    console.log(rReq)
+
+    let resp = await fetch(url + "reimbursement", {
+        method: 'POST',
+        body: JSON.stringify(rReq),
+        credentials: "include"
+    })
+
+    if (resp.status === 201) {
+        alert('Your request was successfully submitted');
+        console.log("Request was successgully submitted.")
+        //showRFunc()
+    } else {
+        document.getElementById("new-msg").innerText = "Request was not successfully submitted.";
     }
 }
 
@@ -109,43 +150,7 @@ async function showRFunc() {
     }
 }
 
-function newReqFunc() {
-    window.location.href = 'newrequest.html';
-}
 
-async function addFunc() {
-    let amount = document.getElementById("amount").value;
-    let description = document.getElementById("description").value;
-    let tId = document.getElementById("type-options"); //https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
-    var typeId = tId.options[tId.selectedIndex].value;
-    let author = uId;
-
-
-    let rReq = {
-        amount: amount,
-        description: description,
-        author: author,
-        statusId: 1,
-        typeId: typeId
-    }
-
-    console.log(rReq)
-
-    let resp = await fetch(url + "newrequesr", {
-        method: 'POST',
-        body: JSON.stringify(rReq),
-        credentials: "include"
-    })
-
-    if (resp.status === 201) {
-        console.log("Request was successgully submitted.")
-        showRFunc()
-    } else {
-        document.getElementById("new-msg").innerText = "Request was not successfully submitted.";
-    }
-
-
-}
 
 
 

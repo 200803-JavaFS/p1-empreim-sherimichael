@@ -14,24 +14,23 @@
 </head>
 
 <body>
-    <div id="login">
+    <div id="employee">
         <h3 id="welcome-row" class="row justify-content-center align-items-center text-white">Employee Portal</h3>
-        <h4 id="welcome-row" class="row justify-content-center align-items-center text-white">Reimbursement Requests</h4>
-        <div class="container">
+        <h4 id="welcome-row2" class="row justify-content-center align-items-center text-white">Reimbursement Requests</h4>
+        <div class="container-employee text-center">
             <div id="employee-row" class="row justify-content-center align-items-center">
-                <div id="login-column" class="col-md-6">
-                    <div id="login-box" class="col-md-12">
-                        <div id="login-form" class="form" action="" method="post">
-                            <h5 class="text-center text-info">What would you like to do?</h5>
-                            <div class="type-dropdown form-group dropdown">
-                                <button id="employee-btn" type="button" class="btn btn-info btn-md dropdown-toggle" data-toggle="dropdown">
-    									Select Reimbursement Action
- 								</button>
-                                <div id="employee-options" class="dropdown-menu">
-                                    <option value=1>Submit a New Request</option>
+                <div id="employee-column" class="col-md-6">
+                    <div id="employee-box" class="col-md-12">
+                        <div id="employee-form" class="form" action="" method="post">
+                            <h5 id="box-text" class="text-center text-info">What would you like to do?</h5>
+                            <div class="type-dropdown form-group dropdown text-center">    
+                                <select onchange="location = this.value;" id="employee-btn" class="btn btn-info btn-md dropdown-toggle" data-toggle="dropdown">
+                                    <option value="">Select Action from Dropdown</option>
+                                    <option value="newrequest.html">Submit a New Request</option>
                                     <option value=2>View My Pending Requests</option>
                                     <option value=3>View My Past Requests</option>
-                                </div>
+                                    <option value=4>Logout</option>
+                                </select>
                             </div>
                         </div>
                     </div>

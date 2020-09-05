@@ -33,7 +33,7 @@ public class Driver {
 		
 		log.info("@main in Driver - app starting");
 			
-		insertValues();
+		//insertValues();
 			
 		List<Reimbursement> rs = rDao.findAll();
 			

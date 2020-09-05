@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.LoginDTO;
+import com.revature.models.UserRole;
 import com.revature.services.LoginService;
 import com.revature.services.UserServices;
 
@@ -41,9 +42,9 @@ public class LoginController {
 					HttpSession ses = req.getSession();
 					ses.setAttribute("user", l);
 					ses.setAttribute("loggedin", true);
-					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId());	
+					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId().getRoleId());	
 					res.setStatus(200);
-					String json = om.writeValueAsString(ses.getAttribute("user_role_id"));
+					String json = om.writeValueAsString((Integer)ses.getAttribute("user_role_id"));
 					res.getWriter().println(json);
 				} else {
 					HttpSession ses = req.getSession(false);

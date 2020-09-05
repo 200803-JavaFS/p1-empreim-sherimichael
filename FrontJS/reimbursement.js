@@ -34,11 +34,9 @@ async function loginFunc() {
 
     if (resp.status == 200) {
         document.getElementById("login-row").innerText = "You have successfully logged in.";
-        //let data = await resp.json();
         let data = await resp.text();
         console.log(resp);
-        //let uId = data.userId;
-        let uRoleId = data.uRoleId;
+        let uRoleId = data;
         //sessionStorage.setItem("uId", uId);
         sessionStorage.setItem("uRoleId", uRoleId);
         console.log(uRoleId);

@@ -51,7 +51,7 @@ public class MasterServlet extends HttpServlet{
 
 		System.out.println(Arrays.toString(portions));
 		
-		if ((portions[0]).equals("request")) {
+		if ((portions[0]).equals("reimbursement")) {
 			if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
 				if (portions.length == 2) {
 					int reimbId = Integer.parseInt(portions[1]);
@@ -95,9 +95,9 @@ public class MasterServlet extends HttpServlet{
 				lc.login(req, res);	
 				break;
 				
-			case "newrequest":
+			case "reimbursement":
 				log.info("@newrequest in doPost at MasterServletSwitch");
-				//lc.logout(req, res);
+				rc.addR(req, res);
 				break;
 				
 			case "logout":

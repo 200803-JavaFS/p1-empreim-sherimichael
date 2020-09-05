@@ -41,11 +41,10 @@ public class LoginController {
 					HttpSession ses = req.getSession();
 					ses.setAttribute("user", l);
 					ses.setAttribute("loggedin", true);
-					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId().getURole());	
+					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId());	
 					res.setStatus(200);
-					String json = om.writeValueAsString(ses.getAttribute("user_role"));
+					String json = om.writeValueAsString(ses.getAttribute("user_role_id"));
 					res.getWriter().println(json);
-					res.getWriter().println("Login Successful");
 				} else {
 					HttpSession ses = req.getSession(false);
 					if (ses != null) {

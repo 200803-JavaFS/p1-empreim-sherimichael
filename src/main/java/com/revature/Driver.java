@@ -2,7 +2,6 @@ package com.revature;
 
 import java.sql.Timestamp;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import org.apache.logging.log4j.LogManager;
@@ -18,6 +17,7 @@ import com.revature.models.ReimbursementStatus;
 import com.revature.models.ReimbursementType;
 import com.revature.models.User;
 import com.revature.models.UserRole;
+import com.revature.models.inputRDTO;
 
 public class Driver {
 		
@@ -57,11 +57,12 @@ public class Driver {
 			uDao.addUser(u1);
 			User u2 = new User("joker", hashp, "The", "Joker", "joker@email.com", ur2);
 			uDao.addUser(u2);
-				
-			Reimbursement r1 = new Reimbursement();
+	
+			
+			inputRDTO r1 = new inputRDTO();
 			System.out.println(r1);
-			Reimbursement r2 = new Reimbursement();
-			List<Reimbursement> rList = Arrays.asList(r1, r2);
+			inputRDTO r2 = new inputRDTO();
+			List<inputRDTO> rList = Arrays.asList(r1, r2);
 			ReimbursementStatus rs = new ReimbursementStatus("pending", rList);
 			ReimbursementStatus rs2 = new ReimbursementStatus("approved", rList);
 			ReimbursementStatus rs3 = new ReimbursementStatus("denied", rList);
@@ -69,21 +70,23 @@ public class Driver {
 			ReimbursementType rt2 = new ReimbursementType("food", rList);
 			ReimbursementType rt3 = new ReimbursementType("lodging", rList);
 			ReimbursementType rt4 = new ReimbursementType("other", rList);
-			ReimbursementType rt5 = new ReimbursementType("other", rList);
 			rSDao.addRStatus(rs);
+			rSDao.addRStatus(rs2);
+			rSDao.addRStatus(rs3);
 			rTDao.addRType(rt);
-			Date date = new Date();
-			Timestamp ts1 = new Timestamp(date.getTime());
-			Timestamp ts2 = new Timestamp(date.getTime());
-			Reimbursement r3 = new Reimbursement(27.56, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs2, rt2);
-			Reimbursement r4 = new Reimbursement(65.34, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs3, rt3);
-			Reimbursement r5 = new Reimbursement(5.78, ts1, ts2, "Gas to pickup Supplies", u1, u2, rs2, rt4);
-			Reimbursement r6 = new Reimbursement(100.00, ts1, ts2, "Client Mtg in Omaha", u1, u2, rs2, rt);
-			Reimbursement r7 = new Reimbursement(20.00, ts1, null , "Client Mtg in Omaha", u1, u2, rs, rt5);
+			rTDao.addRType(rt2);
+			rTDao.addRType(rt3);
+			rTDao.addRType(rt4);
+			Timestamp t1 = new Timestamp(System.currentTimeMillis());
+			Timestamp t2 = new Timestamp(System.currentTimeMillis());
+			Reimbursement r3 = new Reimbursement(27.56,t1, t2, "Client Mtg in Omaha",u1, u2, rs2,rt2);
+			Reimbursement r5 = new Reimbursement(5.78, t1, null, "Gas to pickup Supplies", u1, null, rs, rt4);
+			Reimbursement r6 = new Reimbursement(100.00,t1, t2, "Client Mtg in Omaha",u1, u2,rs3, rt);
+			Reimbursement r7 = new Reimbursement(20.00,t1, null, "Client Mtg in Omaha", u1, null, rs, rt4);
 			rDao.addReimbursement(r3);
-			rDao.addReimbursement(r4);
 			rDao.addReimbursement(r5);
 			rDao.addReimbursement(r6);
 			rDao.addReimbursement(r7);
+			
 		}
 }

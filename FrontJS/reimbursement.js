@@ -13,12 +13,7 @@ document.getElementById("loginbtn").addEventListener("click", loginFunc);
 //document.getElementById("changestatus").addEventListener("click", loginFunc);
 
 async function loginFunc() {
-    /*
-    if (document.getElementById("username").value == "" || document.getElementById("password").value == "") {
-        alert('Please fill in all details');
-        resetLogin();
-    } else {
-        */
+
     let usern = document.getElementById("username").value;
     let userp = document.getElementById("password").value;
 
@@ -39,27 +34,25 @@ async function loginFunc() {
 
     if (resp.status == 200) {
         document.getElementById("login-row").innerText = "You have successfully logged in.";
-        let data = await resp.json();
-        let uId = userId
-        let uRole = data.userRole;
-        console.log(uRole);
-        if (uRole == "Employee") {
+        //let data = await resp.json();
+        let data = await resp.text();
+        console.log(resp);
+        //let uId = data.userId;
+        let uRoleId = data.uRoleId;
+        //sessionStorage.setItem("uId", uId);
+        sessionStorage.setItem("uRoleId", uRoleId);
+        console.log(uRoleId);
+        //console.log(uId);
+        if (uRoleId == 1) {
             console.log("employee page");
-            window.location.href = 'employee.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
+            location.href = 'employee.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
 
-        } else if (uRole == "Finance Manager") {
+        } else if (uRoleId == 2) {
             console.log("finance manager page");
             window.location.href = 'financemanager.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
-        }
-        console.log(resp);
+        } else { console.log("Holy Cow, Batman!"); }
     } else {
-        location.reload().document.getElementById("new-msg").innerText = "Oops, something went wrong. Please login again.";
-        /*
-        function newMsg() {
-            document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging in again."
-        }
-        newMsg();
-        */
+        resetLogin();
     }
 }
 
@@ -73,46 +66,48 @@ async function showRFunc() {
 
     if (resp.status === 200) {
         let data = await resp.json();
+
         for (let reimbursement of data) {
             console.log(reimbursement);
+
             let row = document.createElement("tr");
             let cell = document.createElement("td");
             cell.innerHTML = reimbursement.reimbId;
             row.appendChild(cell);
+
             let cell2 = document.createElement("td");
             cell2.innerHTML = reimbursement.amount;
             row.appendChild(cell2);
+
             let cell3 = document.createElement("td");
             cell3.innerHTML = reimbursement.submitted;
             row.appendChild(cell3);
+
             let cell4 = document.createElement("td");
             cell4.innerHTML = reimbursement.resolved;
             row.appendChild(cell4);
+
             let cell5 = document.createElement("td");
             cell5.innerHTML = reimbursement.description;
             row.appendChild(cell5);
+
             let cell6 = document.createElement("td");
             cell6.innerHTML = reimbursement.author;
             row.appendChild(cell6);
+
             let cell7 = document.createElement("td");
             cell6.innerHTML = reimbursement.resolver;
             row.appendChild(cell7);
+
             let cell8 = document.createElement("td");
             cell6.innerHTML = reimbursement.status_id;
             row.appendChild(cell8);
+
             let cell9 = document.createElement("td");
             cell6.innerHTML = reimbursement.type_id;
             row.appendChild(cell9);
-            if (avenger.homeBase != null) {
-                let cell7 = document.createElement("td");
-                cell7.innerHTML = avenger.homeBase.homeBase;
-                row.appendChild(cell7);
-            } else {
-                let cell7 = document.createElement("td");
-                row.appendChild(cell7);
-            }
-            document.getElementById("avbody").appendChild(row);
         }
+        document.getElementById("avbody").appendChild(row);
     }
 }
 
@@ -120,10 +115,11 @@ function newReqFunc() {
     window.location.href = 'newrequest.html';
 }
 
-async function addNewReqFunc() {
+async function addFunc() {
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
-    let typeId = document.getElementById("type").value;
+    let tId = document.getElementById("type-options"); //https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
+    var typeId = tId.options[tId.selectedIndex].value;
     let author = uId;
 
 
@@ -147,7 +143,7 @@ async function addNewReqFunc() {
         console.log("Request was successgully submitted.")
         showRFunc()
     } else {
-        document.getElementById("login-row").innerText = "Request was not successfully submitted.";
+        document.getElementById("new-msg").innerText = "Request was not successfully submitted.";
     }
 
 
@@ -163,10 +159,8 @@ async function viewPendingFunc() {
     })
 }
 
-
-
 function resetLogin() {
     console.log("@resetLogin");
-    document.getElementById("login-row").innerText = "Oops, something went wrong. Please try logging in again.";
-    //document.getElementById("loginbtn").reset();
+    document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging in again.";
+    //location.reload();
 }

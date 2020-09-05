@@ -26,10 +26,12 @@ public class ReimbursementServices {
 	public List<Reimbursement> findByUserStatus(int author, int statusId) {
 		return rDao.findByUserStatus(author, statusId);
 	}
-	public boolean addReimbursement(inputRDTO addR, int userId) {
-		return rDao.addReimbursement(addR, userId);
+	public boolean addReimbursement(inputRDTO addR) {
+		Reimbursement r = new Reimbursement(addR.getAmount(), null, null, addR.getDescription(), addR.getAuthor(), null, addR.getStatusId(), addR.getTypeId());
+		return rDao.addReimbursement(r);
 	}
-	public boolean updateReimbursement(inputRDTO updateR) {
-		return rDao.addReimbursement(updateR);
+	public boolean updateReimbursement(inputRDTO rDTO) {
+		Reimbursement r = new Reimbursement(rDTO.getAmount(), null, null, rDTO.getDescription(), rDTO.getAuthor(), null, rDTO.getStatusId(), rDTO.getTypeId());
+		return rDao.addReimbursement(r);
 	}
 }

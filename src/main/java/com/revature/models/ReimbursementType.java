@@ -29,13 +29,13 @@ public class ReimbursementType implements Serializable {
 		super();
 	}
 
-	public ReimbursementType(int typeId, String type, List<Reimbursement> r) {
+	public ReimbursementType(int typeId, String type, List<inputRDTO> r) {
 		super();
 		this.typeId = typeId;
 		this.type = type;
 	}
 
-	public ReimbursementType(String type,  List<Reimbursement> r) {
+	public ReimbursementType(String type,  List<inputRDTO> rList) {
 		super();
 		this.type = type;
 	}

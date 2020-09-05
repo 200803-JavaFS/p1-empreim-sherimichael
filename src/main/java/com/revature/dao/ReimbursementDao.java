@@ -6,7 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.Reimbursement;
-import com.revature.models.inputRDTO;
 import com.revature.utils.HibernateUtil;
 
 public class ReimbursementDao implements ReimbursementDaoIf {
@@ -75,16 +74,17 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 			return null;
 		}
 		
+		/*
 		@Override
 		public List<Reimbursement> findByUserStatus(int author, int statusId) {
 			Session ses = HibernateUtil.getSession();
 			
 			try {
 				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement as r"
-						+ "LEFT JOIN"
-						+ "ReimbursementStatus as rs"
-						+ "on r.statusID = rs.statusId"
-						+ "WHERE status = " + statusId, Reimbursement.class).list();
+						+ " LEFT JOIN"
+						+ " ReimbursementStatus as rs"
+						+ " on r.statusID = rs.statusId"
+						+ " WHERE r.status = " + statusId, Reimbursement.class).list() 
 				return rList;
 			}
 			catch(HibernateException e) {
@@ -93,13 +93,13 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 			
 			return null;
 		}
+		*/
 		
 		@Override
-		public boolean addReimbursement(inputRDTO reimbursement, int uId) {
+		public boolean addReimbursement(Reimbursement r) {
 			Session ses = HibernateUtil.getSession();
-			
 			try {
-				ses.save(reimbursement);
+				ses.save(r);
 				return true;
 			}catch (HibernateException e) {
 				e.printStackTrace();
@@ -107,9 +107,9 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 			}
 			
 		}
-		
+	
 		@Override
-		public boolean updateReimbursement(inputRDTO r) {
+		public boolean updateReimbursement(Reimbursement r) {
 			Session ses = HibernateUtil.getSession();
 			try {
 				ses.merge(r);
@@ -118,5 +118,11 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 				e.printStackTrace();
 				return false;
 			}
+		}
+
+		@Override
+		public List<Reimbursement> findByUserStatus(int author, int statusId) {
+			// TODO Auto-generated method stub
+			return null;
 		}
 }

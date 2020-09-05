@@ -28,14 +28,15 @@ public class ReimbursementStatus implements Serializable{
 	public ReimbursementStatus() {
 		super();
 	}
-
-	public ReimbursementStatus(int statusId, String status, List<Reimbursement> r) {
+	
+	public ReimbursementStatus(int statusId, String status, List<List<inputRDTO>> r) {
 		super();
 		this.statusId = statusId;
 		this.status = status;
 	}
 
-	public ReimbursementStatus(String status, List<Reimbursement> r) {
+	
+	public ReimbursementStatus(String status, List<inputRDTO> rList) {
 		super();
 		this.status = status;
 	}

@@ -82,8 +82,7 @@ public class ReimbursementController {
 		String body = new String(sb);
 		
 		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
-		Integer uId = (Integer) req.getSession().getAttribute("userId");
-		if(rs.addReimbursement(rDTO, uId.intValue())) {
+		if(rs.addReimbursement(rDTO)) {
 			res.setStatus(201);
 			res.getWriter().println("Reimbursement Request Added");
 		}
@@ -108,7 +107,7 @@ public void updateR(HttpServletRequest req, HttpServletResponse res) throws IOEx
 		
 		String body = new String(sb);
 		
-		Reimbursement r = om.readValue(body, Reimbursement.class);
+		inputRDTO r = om.readValue(body, inputRDTO.class);
 		
 		if(rs.addReimbursement(r)) {
 			res.setStatus(201);

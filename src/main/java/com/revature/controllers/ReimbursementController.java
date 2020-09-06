@@ -82,11 +82,11 @@ public class ReimbursementController {
 		
 		String body = new String(s);
 		
-		System.out.println(body);
+		System.out.println("@addR in RCon body = " + body);
 		
 		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
-		Integer uId = (Integer) req.getSession().getAttribute("userId");
-		if(rs.addReimbursement(rDTO, uId.intValue())) {
+		
+		if(rs.addReimbursement(rDTO)) {
 			res.setStatus(200);
 		}
 		else {
@@ -112,10 +112,7 @@ public void updateR(HttpServletRequest req, HttpServletResponse res) throws IOEx
 		
 		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
 		
-		HttpSession ses = req.getSession();
-		Integer uId = (Integer)ses.getAttribute("userId");
-		
-		if(rs.updateReimbursement(rDTO, uId.intValue())) {
+		if(rs.updateReimbursement(rDTO)) {
 			res.setStatus(201);
 			res.getWriter().println("Status Changed");
 		}

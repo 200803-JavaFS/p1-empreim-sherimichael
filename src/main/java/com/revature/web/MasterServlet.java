@@ -77,9 +77,7 @@ public class MasterServlet extends HttpServlet{
 		res.setContentType("application/json");
 		res.setStatus(400);
 		final String URI = req.getRequestURI().replace("/project1/", "");
-		System.out.println(req.getSession().getAttribute("userId"));
 		String[] portions = URI.split("/");
-		System.out.println(Arrays.toString(portions));
 		
 		
 			try {

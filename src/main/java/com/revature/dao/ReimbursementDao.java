@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.hibernate.HibernateException;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 
 import com.revature.models.Reimbursement;
 import com.revature.utils.HibernateUtil;
@@ -79,8 +80,11 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		
 			Session ses = HibernateUtil.getSession();
 			try {
-				ses.save(r);
-				return true;
+			Transaction tx= ses.beginTransaction();
+			ses.save(r);
+			tx.commit();
+			return true;
+			
 			}catch (HibernateException e) {
 				e.printStackTrace();
 				return false;
@@ -91,18 +95,15 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		@Override
 		public boolean updateReimbursement(Reimbursement r) {
 			Session ses = HibernateUtil.getSession();
+			Transaction tx= ses.beginTransaction();
 			try {
-				ses.merge(r);
-				return true;
-			} catch (HibernateException e) {
+			ses.merge(r);
+			tx.commit();
+			return true;
+			
+			}catch (HibernateException e) {
 				e.printStackTrace();
 				return false;
 			}
-		}
-
-		@Override
-		public List<Reimbursement> findByUserStatus(int author, int statusId) {
-			// TODO Auto-generated method stub
-			return null;
 		}
 }

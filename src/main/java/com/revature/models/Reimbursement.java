@@ -29,7 +29,7 @@ public class Reimbursement implements Serializable{
 	private int reimbId;
 	
 	@Column(name="amount", nullable=false)
-	private double amount;
+	private int amount;
 	
 	@CreationTimestamp
 	@Column(name="submitted", nullable=false)
@@ -63,7 +63,7 @@ public class Reimbursement implements Serializable{
 	}
 
 
-	public Reimbursement(int reimbId, double amount, Timestamp submitted, Timestamp resolved, String description,
+	public Reimbursement(int reimbId,int amount, Timestamp submitted, Timestamp resolved, String description,
 		 User author, User resolver, ReimbursementStatus statusId, ReimbursementType typeId) {
 		super();
 		this.reimbId = reimbId;
@@ -78,7 +78,7 @@ public class Reimbursement implements Serializable{
 	}
 
 
-	public Reimbursement(double amount, Timestamp submitted, Timestamp resolved, String description,
+	public Reimbursement(int amount, Timestamp submitted, Timestamp resolved, String description,
 			User author, User resolver, ReimbursementStatus statusId, ReimbursementType typeId) {
 		super();
 		this.amount = amount;
@@ -107,7 +107,7 @@ public class Reimbursement implements Serializable{
 	}
 
 
-	public void setAmount(double amount) {
+	public void setAmount(int amount) {
 		this.amount = amount;
 	}
 
@@ -172,14 +172,12 @@ public class Reimbursement implements Serializable{
 	public void setTypeId(ReimbursementType typeId) {
 		this.typeId = typeId;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(amount);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + amount;
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + reimbId;
@@ -201,7 +199,7 @@ public class Reimbursement implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		Reimbursement other = (Reimbursement) obj;
-		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
+		if (amount != other.amount)
 			return false;
 		if (author == null) {
 			if (other.author != null)
@@ -225,14 +223,20 @@ public class Reimbursement implements Serializable{
 				return false;
 		} else if (!resolver.equals(other.resolver))
 			return false;
-		if (statusId != other.statusId)
+		if (statusId == null) {
+			if (other.statusId != null)
+				return false;
+		} else if (!statusId.equals(other.statusId))
 			return false;
 		if (submitted == null) {
 			if (other.submitted != null)
 				return false;
 		} else if (!submitted.equals(other.submitted))
 			return false;
-		if (typeId != other.typeId)
+		if (typeId == null) {
+			if (other.typeId != null)
+				return false;
+		} else if (!typeId.equals(other.typeId))
 			return false;
 		return true;
 	}

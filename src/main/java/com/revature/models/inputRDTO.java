@@ -2,28 +2,18 @@ package com.revature.models;
 
 public class inputRDTO {
 	
-	private int reimId;
-	private double amount;
-	private String description;
-	private int typeId;
-	private int statusId;
+	public int reimId;
+	public String amount;
+	public String description;
+	public String typeId;
+	public int statusId;
 	public String author;
 	
 	public inputRDTO() {
 		super();
 	}
 
-	public inputRDTO(double amount, String description, int typeId,int statusId, String author) {
-		super();
-		this.amount = amount;
-		this.description = description;
-		this.typeId = typeId;
-		this.statusId = statusId;
-		this.author = author;		
-	}
-	
-	public inputRDTO(int reimId, double amount, String description, int typeId,
-			int statusId, String author) {
+	public inputRDTO(int reimId, String amount, String description, String typeId, int statusId, String author) {
 		super();
 		this.reimId = reimId;
 		this.amount = amount;
@@ -32,70 +22,26 @@ public class inputRDTO {
 		this.statusId = statusId;
 		this.author = author;
 	}
-
-	public int getReimId() {
-		return reimId;
-	}
-
-	public void setReimId(int reimId) {
-		this.reimId = reimId;
-	}
-	
-	public double getAmount() {
-		return amount;
-	}
-
-	public void setAmount(double amount) {
+	public inputRDTO(String amount, String description, String typeId, int statusId, String author) {
+		super();
 		this.amount = amount;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
 		this.description = description;
-	}
-
-	public int getTypeId() {
-		return typeId;
-	}
-
-	public void setTypeId(int typeId) {
 		this.typeId = typeId;
-	}
-
-	public int getStatusId() {
-		return statusId;
-	}
-
-	public void setStatusId(int statusId) {
 		this.statusId = statusId;
-	}
-
-	public String getAuthor() {
-		return author;
-	}
-
-	public void setAuthor(String author) {
 		this.author = author;
 	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		long temp;
-		temp = Double.doubleToLongBits(amount);
-		result = prime * result + (int) (temp ^ (temp >>> 32));
+		result = prime * result + ((amount == null) ? 0 : amount.hashCode());
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
 		result = prime * result + reimId;
 		result = prime * result + statusId;
-		result = prime * result + typeId;
+		result = prime * result + ((typeId == null) ? 0 : typeId.hashCode());
 		return result;
 	}
-
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -105,7 +51,10 @@ public class inputRDTO {
 		if (getClass() != obj.getClass())
 			return false;
 		inputRDTO other = (inputRDTO) obj;
-		if (Double.doubleToLongBits(amount) != Double.doubleToLongBits(other.amount))
+		if (amount == null) {
+			if (other.amount != null)
+				return false;
+		} else if (!amount.equals(other.amount))
 			return false;
 		if (author == null) {
 			if (other.author != null)
@@ -121,13 +70,18 @@ public class inputRDTO {
 			return false;
 		if (statusId != other.statusId)
 			return false;
-		if (typeId != other.typeId)
+		if (typeId == null) {
+			if (other.typeId != null)
+				return false;
+		} else if (!typeId.equals(other.typeId))
 			return false;
 		return true;
 	}
-
 	@Override
 	public String toString() {
-		return "inputRDTO [reimId=" + reimId + "amount=" + amount + ", description=" + description + ", typeId=" + typeId + "statusId=" + statusId + "author=" + author + "]";
+		return "inputRDTO [reimId=" + reimId + ", amount=" + amount + ", description=" + description + ", typeId="
+				+ typeId + ", statusId=" + statusId + ", author=" + author + "]";
 	}
+	
 }
+	

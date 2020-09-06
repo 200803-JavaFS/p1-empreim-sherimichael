@@ -113,7 +113,7 @@ async function addFunc() {
 
     console.log(rReq)
 
-    let resp = await fetch(url + "reimbursement", {
+    let resp = await fetch(url + "addR", {
         method: 'POST',
         body: JSON.stringify(rReq),
         credentials: "include"
@@ -131,6 +131,9 @@ async function addFunc() {
 }
 
 async function showRFunc() {
+
+    document.getElementById("newreqform").style.display = "none";
+    document.getElementById("showreimbursement").style.display = "block"
 
     document.getElementById("rbody").innerText = "";
 

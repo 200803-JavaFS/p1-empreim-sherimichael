@@ -32,22 +32,26 @@ public class ReimbursementServices {
 	public List<Reimbursement> findByUserStatus(int author, int statusId) {
 		return rDao.findByUserStatus(author, statusId);
 	}
-	public boolean addReimbursement(inputRDTO rDTO, int uId) {
+	public boolean addReimbursement(inputRDTO rDTO) {
 			Reimbursement r = new Reimbursement();
-			r.setAuthor(uDao.findByUId(uId));
-			r.setAmount(rDTO.getAmount());
-			r.setDescription(rDTO.getDescription());
-			r.setTypeId(rtDao.findById(rDTO.getTypeId()));
+			int amount = Integer.parseInt(rDTO.amount);
+			int typeId = Integer.parseInt(rDTO.typeId);
+			
+			r.setAuthor(uDao.findByUsername(rDTO.author));
+			r.setAmount(amount);
+			r.setDescription(rDTO.description);
+			r.setStatusId(rsDao.findByStatusId(rDTO.statusId));
+			r.setTypeId(rtDao.findById(typeId));
 			if(rDao.addReimbursement(r)) {
 				return true;
 			}
 			return false;
 	}
-	public boolean updateReimbursement(inputRDTO rDTO, int uId) {
-		Reimbursement r = rDao.findByRId(rDTO.getReimId());
-		ReimbursementStatus rs = rsDao.findByStatusId(rDTO.getStatusId());
+	public boolean updateReimbursement(inputRDTO rDTO) {
+		Reimbursement r = rDao.findByRId(rDTO.reimId);
+		ReimbursementStatus rs = rsDao.findByStatusId(rDTO.statusId);
 		r.setStatusId(rs);
-		r.setResolver(uDao.findByUId(uId));
+		r.setResolver(uDao.findByUsername(rDTO.author));
 		rDao.updateReimbursement(r);
 		return false;
 	}

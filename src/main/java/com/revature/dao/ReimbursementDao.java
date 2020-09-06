@@ -6,7 +6,6 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.Reimbursement;
-import com.revature.models.User;
 import com.revature.utils.HibernateUtil;
 
 public class ReimbursementDao implements ReimbursementDaoIf {
@@ -75,33 +74,9 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 			return null;
 		}
 		
-		/*
-		@Override
-		public List<Reimbursement> findByUserStatus(int author, int statusId) {
-			Session ses = HibernateUtil.getSession();
-			
-			try {
-				List<Reimbursement> rList = ses.createQuery("FROM Reimbursement as r"
-						+ " LEFT JOIN"
-						+ " ReimbursementStatus as rs"
-						+ " on r.statusID = rs.statusId"
-						+ " WHERE r.status = " + statusId, Reimbursement.class).list() 
-				return rList;
-			}
-			catch(HibernateException e) {
-				e.printStackTrace();
-			}
-			
-			return null;
-		}
-		*/
-		
 		@Override
 		public boolean addReimbursement(Reimbursement r) {
 		
-			Reimbursement newR = new Reimbursement();
-			
-			
 			Session ses = HibernateUtil.getSession();
 			try {
 				ses.save(r);

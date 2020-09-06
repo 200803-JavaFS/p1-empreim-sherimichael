@@ -6,6 +6,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -15,7 +16,6 @@ import com.revature.dao.UserDao;
 import com.revature.models.Reimbursement;
 import com.revature.models.inputRDTO;
 import com.revature.services.ReimbursementServices;
-import com.revature.services.UserServices;
 
 public class ReimbursementController {
 	
@@ -71,32 +71,28 @@ public class ReimbursementController {
 		
 		BufferedReader reader = req.getReader();
 		
-		StringBuilder sb = new StringBuilder();
+		StringBuilder s = new StringBuilder();
 		
 		String line = reader.readLine();
 		
 		while(line != null) {
-			sb.append(line);
+			s.append(line);
 			line = reader.readLine();
 		}
 		
-		String body = new String(sb);
+		String body = new String(s);
+		
+		System.out.println(body);
 		
 		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
-		UserServices us = new UserServices();
-		
-		if(rs.addReimbursement(rDTO)) {
-			res.setStatus(201);
-			res.getWriter().println("Reimbursement Request Added");
+		Integer uId = (Integer) req.getSession().getAttribute("userId");
+		if(rs.addReimbursement(rDTO, uId.intValue())) {
+			res.setStatus(200);
 		}
 		else {
-			res.setStatus(403);
+			res.setStatus(401);
 		}
 	}
-
-public void addReimbursement(String body) {
-	
-}
 	
 public void updateR(HttpServletRequest req, HttpServletResponse res) throws IOException{
 		log.info("@updateR in ReimbursementController");
@@ -114,11 +110,14 @@ public void updateR(HttpServletRequest req, HttpServletResponse res) throws IOEx
 		
 		String body = new String(sb);
 		
-		inputRDTO r = om.readValue(body, inputRDTO.class);
+		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
 		
-		if(rs.addReimbursement(r)) {
+		HttpSession ses = req.getSession();
+		Integer uId = (Integer)ses.getAttribute("userId");
+		
+		if(rs.updateReimbursement(rDTO, uId.intValue())) {
 			res.setStatus(201);
-			res.getWriter().println("Reimbursement Request Updated");
+			res.getWriter().println("Status Changed");
 		}
 		else {
 			res.setStatus(403);

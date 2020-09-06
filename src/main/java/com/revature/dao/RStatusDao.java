@@ -41,6 +41,22 @@ public class RStatusDao implements RStatusDaoIf {
 		
 		return null;
 	}
+	
+	@Override
+	public ReimbursementStatus findByStatusId(int statusId) {
+		log.info("@afindByStatusId in RStatusDao");
+		Session ses = HibernateUtil.getSession();
+		
+		try {
+			ReimbursementStatus rs = ses.get(ReimbursementStatus.class, statusId);
+			return rs;
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
 
 	@Override
 	public boolean addRStatus(ReimbursementStatus rs) {

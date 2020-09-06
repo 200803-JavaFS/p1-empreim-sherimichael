@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 
+import java.io.BufferedReader;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,10 +19,20 @@ public class LoginController {
 	private static UserServices us = new UserServices();
 	private static ObjectMapper om = new ObjectMapper();
 	
-	public void login(HttpServletRequest req, HttpServletResponse res, String body) throws IOException {
+	public void login(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		
-			if (req.getMethod().equals("POST")) {
-		
+		BufferedReader reader = req.getReader();
+
+		StringBuilder sb = new StringBuilder();
+
+		String line = reader.readLine();
+
+		while (line != null) {
+			sb.append(line);
+			line = reader.readLine();
+		}
+
+		String body = new String(sb);
 
 				LoginDTO l = om.readValue(body, LoginDTO.class);
 				
@@ -41,8 +52,7 @@ public class LoginController {
 					res.setStatus(401);
 					res.getWriter().println("Login failed");
 				}			
-			}
-	}
+		}
 
 	public void logout(HttpServletRequest req, HttpServletResponse res, String body) throws IOException {
 		HttpSession ses = req.getSession(false);

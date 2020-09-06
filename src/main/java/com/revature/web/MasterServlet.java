@@ -1,5 +1,4 @@
 package com.revature.web;
-import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -27,11 +26,7 @@ public class MasterServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	private static ReimbursementController rc = new ReimbursementController();
 	private static LoginController lc = new LoginController();
-	private static UserRoleController urc = new UserRoleController();
-	private static UserController uc = new UserController();
-	private static UserDao uDao = new UserDao();
-	
-	private static UserServices us = new UserServices();
+
 	
 	public MasterServlet() {
 		super();
@@ -79,27 +74,12 @@ public class MasterServlet extends HttpServlet{
 		 * functionalities: login, logout, & employees can submit new reimbursement requests
 		 */
 		
-		final String URI = req.getRequestURI().replace("/project1/", "");
-
-		String[] portions = URI.split("/");
-		
-		System.out.println("@MS URI=" + URI);
-
-		// JSON content type
 		res.setContentType("application/json");
-
-		BufferedReader reader = req.getReader();
-
-		StringBuilder sb = new StringBuilder();
-
-		String line = reader.readLine();
-		while (line != null) {
-			sb.append(line);
-			line = reader.readLine();
-		}
-		String body = new String(sb);
-		res.setStatus(404);
-		System.out.println("@MS body = " + body);
+		res.setStatus(400);
+		final String URI = req.getRequestURI().replace("/project1/", "");
+		System.out.println(req.getSession().getAttribute("userId"));
+		String[] portions = URI.split("/");
+		System.out.println(Arrays.toString(portions));
 		
 		
 			try {
@@ -107,17 +87,22 @@ public class MasterServlet extends HttpServlet{
 			
 				case "login":
 					log.info("@login in doPost at MasterServletSwitch");
-					lc.login(req, res, body);	
+					lc.login(req, res);	
 					break;
 				
-				case "reimbursement":
-					log.info("@reimbursement in doPost at MasterServletSwitch");
-					//rc.addR(req, res, body);
+				case "addR":
+					log.info("@addR in doPost at MasterServletSwitch");
+					rc.addR(req, res);
+					break;
+					
+				case "changeStatus":
+					log.info("@changeStatus in doPost at MasterServletSwitch");
+					rc.updateR(req, res);
 					break;
 				
 				case "logout":
 					log.info("@logout in doPost at MasterServletSwitch");
-					lc.logout(req, res, body);
+					//lc.logout(req, res);
 					break;
 			}
 

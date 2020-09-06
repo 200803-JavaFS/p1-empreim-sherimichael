@@ -8,6 +8,7 @@ public interface RStatusDaoIf {
 	
 	public List<ReimbursementStatus> findAll();
 	public ReimbursementStatus findByStatus(String status);
+	public ReimbursementStatus findByStatusId(int statusId);
 	public boolean addRStatus(ReimbursementStatus rs);	
 	public boolean updateRStatus(ReimbursementStatus rs);
 

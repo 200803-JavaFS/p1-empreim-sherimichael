@@ -1,5 +1,6 @@
 const url = "http://localhost:8080/project1/"
 
+var typeId;
 document.getElementById("submitnewrequest").addEventListener("click", addFunc);
 
 async function addFunc() {
@@ -7,9 +8,33 @@ async function addFunc() {
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
     
-    let typeId=document.getElementById("rtype").getRadioVal(value, 'type');
+    const types = document.querySelectorAll('input[name="type"]');
+    let type;
+    for (const t of types) {
+        if (t.checked) {
+            type = t.value;
+            break;
+        }
+    }
+    switch (type) {
+        case "lodging":
+            typeId = 1;
+            break;
+        case "travel":
+            typeId = 2;
+            break; 
+        case "food":
+            typeId = 3;
+            break;
+        case "other":
+            typeId = 4;
+            break;   
+    }
+    console.log(type);
     console.log(typeId);
     let author = 0;
+    let uRoleId = sessionStorage.getItem("uRoleId", uRoleId);
+    console.log(uRoleId);
 
 
     let rReq = {

@@ -40,6 +40,8 @@ async function loginFunc() {
         console.log(resp);
         let uRoleId = data;
         sessionStorage.setItem("uRoleId", uRoleId);
+        //let userId = data.userId;
+        //sessionStorage.setItem("userId", userId);
         console.log(uRoleId);
         if (uRoleId == 1) {
             location.href = 'employeeportal.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage

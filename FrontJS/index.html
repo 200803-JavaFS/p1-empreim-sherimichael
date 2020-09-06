@@ -56,19 +56,25 @@
                                    name="empaxn" value="1">
                                   <label for=""empaxn1>Submit New Reimbursement Request</label>
                               
+                                  <p>
                                   <input class="text-info" type="radio" id="empaxn2"
                                    name="empaxn" value="2">
                                   <label for="empaxn2">View Pending Requests</label>
+                                  </p>
                               
+                                  <p>
                                   <input class="text-info" type="radio" id="empaxn3"
                                    name="empaxn" value="3">
                                   <label for="empaxn3">View Resolved Requests</label>
+                                  </p>
 
+                                  <p>
                                   <input class="text-info" type="radio" id="empaxn4"
                                    name="empaxn" value="4">
                                   <label for="empaxn4">Logout</label>
+                                  </p>
 
-                                  <input id = "submit" type="submit" class="text-info" onsubmit="document.getElementById('submit').style.display = 'none'" value="Send Request">
+                                  <input id = "newreqsubmit" type="submit" style="width:100%" class="btn btn-info btn-md text-info" value="Submit">
                                   <label>Submit</label>
                                 </div>
                                 </div>
@@ -88,12 +94,6 @@
                     <div id="login-box" class="col-md-12">
                         <div id="login-form" class="form" action="" method="post">
                             <h5 class="text-center text-info">Please complete the following:</h5>
-                            <div id="newreq-text" class="input-group mb-3">
-                                <div class="input-group-prepend">
-                                    <span  class="input-group-text text-info">Email:</span>
-                                </div>
-                                  <input id="email" type="text" class="form-control">
-                            </div>
                             <div id="newreq-text" class="input-group mb-3">
                                 <div class="input-group-prepend">
                                     <span  class="input-group-text text-info">Amount Requested: $</span>
@@ -170,25 +170,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script>
     <script src="index.js "></script>
-
-
-    <div class="row" id="table-row">
-        <table class="table-hover table-bordered" id="avtable">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Superhero Name</th>
-                    <th>Superpower</th>
-                    <th>First Name</th>
-                    <th>Last Name</th>
-                    <th>Power Level</th>
-                    <th>Home Base</th>
-                </tr>
-            </thead>
-            <tbody id="avbody">
-            </tbody>
-        </table>
-    </div>
 
 </body>
 

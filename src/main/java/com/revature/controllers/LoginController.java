@@ -1,6 +1,6 @@
 package com.revature.controllers;
 
-import java.io.BufferedReader;
+
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSession;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.LoginDTO;
-import com.revature.models.UserRole;
 import com.revature.services.LoginService;
 import com.revature.services.UserServices;
 
@@ -19,33 +18,13 @@ public class LoginController {
 	private static UserServices us = new UserServices();
 	private static ObjectMapper om = new ObjectMapper();
 	
-	public void login(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void login(HttpServletRequest req, HttpServletResponse res, String body) throws IOException {
 		
 			if (req.getMethod().equals("POST")) {
-			
-				BufferedReader reader = req.getReader();
-
-				StringBuilder sb = new StringBuilder();
-
-				String line = reader.readLine();
-
-				while (line != null) {
-				sb.append(line);
-				line = reader.readLine();
-				}
-
-				String body = new String(sb);
+		
 
 				LoginDTO l = om.readValue(body, LoginDTO.class);
-				/*
-				 * LoginDTO l = new LoginDTO();
-				 l.username = req.getParameter("username");
-                l.password = req.getParameter("password");
-                
-                System.out.println(l.username);
-                System.out.println(l.password);
-                */
-
+				
 				if (ls.login(l)) {
 					HttpSession ses = req.getSession();
 					ses.setAttribute("user", l);
@@ -65,7 +44,7 @@ public class LoginController {
 			}
 	}
 
-	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
+	public void logout(HttpServletRequest req, HttpServletResponse res, String body) throws IOException {
 		HttpSession ses = req.getSession(false);
 
 		if (ses != null) {

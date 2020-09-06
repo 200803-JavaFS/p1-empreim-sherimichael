@@ -106,14 +106,19 @@ public class MasterServlet extends HttpServlet{
 				switch (portions[0]) {
 			
 				case "login":
-				log.info("@login in doPost at MasterServletSwitch");
-				lc.login(req, res);	
-				break;
+					log.info("@login in doPost at MasterServletSwitch");
+					lc.login(req, res, body);	
+					break;
+				
+				case "reimbursement":
+					log.info("@reimbursement in doPost at MasterServletSwitch");
+					//rc.addR(req, res, body);
+					break;
 				
 				case "logout":
-				log.info("@logout in doPost at MasterServletSwitch");
-				lc.logout(req, res);
-				break;
+					log.info("@logout in doPost at MasterServletSwitch");
+					lc.logout(req, res, body);
+					break;
 			}
 
 		} catch (NumberFormatException e) {
@@ -125,7 +130,6 @@ public class MasterServlet extends HttpServlet{
 	
 	@Override
 	protected void doPut (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req,res);
 		
 		/*
 		 * functionalities: finance managers can approve/deny pending requests by changing the status

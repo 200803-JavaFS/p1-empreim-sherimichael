@@ -1,23 +1,19 @@
 const url = "http://localhost:8080/project1/"
 
-// Method = GET
-//document.getElementById("viewopen").addEventListener("click", viewPendingFunc);
-//document.getElementById("viewclosed").addEventListener("click", viewPastFunc);
-
-//Method = POST
 document.getElementById("employeeportal").style.display = "none";
 document.getElementById("newreqform").style.display = "none";
+document.getElementById("showreimbursement").style.display = "none";
 document.getElementById("loginbtn").addEventListener("click", loginFunc);
 
-//document.getElementById("logoutbtn").addEventListener("click", loginFunc);
-
-//Method = PUT
-//document.getElementById("changestatus").addEventListener("click", loginFunc);
+//upon conferring with Nikki - global scoped variables
+var usern;
+var userRole;
+var reimbursement;
 
 async function loginFunc() {
     console.log("@loginFunc");
 
-    var usern = document.getElementById("username").value;
+    usern = document.getElementById("username").value;
     let userp = document.getElementById("password").value;
 
     let user = {
@@ -38,21 +34,15 @@ async function loginFunc() {
 
     if (resp.status == 200) {
         document.getElementById("new-msg").innerText = "You have successfully logged in.";
-        let data = await resp.text();
+        let data = await resp.json();
         console.log(resp);
-        let uRoleId = data;
+        uRoleId = data;
         sessionStorage.setItem("uRoleId", uRoleId);
-        //let userId = data.userId;
-        //sessionStorage.setItem("userId", userId);
-        console.log(uRoleId);
+        //console.log(uRoleId);
         if (uRoleId == 1) {
             showEmployeePortal();
-            //location.href = 'employeeportal.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
-            //console.log("@employeeportal.html");
     
         } else if (uRoleId == 2) {
-            //location.href = 'financemanager.html'; 
-            //console.log("@financemanager.html");
             
         } else { console.log("Holy Cow, Batman!"); }
     } else {
@@ -63,33 +53,35 @@ async function loginFunc() {
 function showEmployeePortal(){
     document.getElementById("login").style.display = "none";
     document.getElementById("employeeportal").style.display = "block";
-    document.getElementById("empaxn").addEventListener("click", getEmpAxnFunc);
+    document.getElementById("newreqsubmit").addEventListener("click", getEmpAxnFunc);
 }
 
 function getEmpAxnFunc(){
     const axns = document.querySelectorAll('input[name="empaxn"]');
-    document.getElementById("employeeportal").style.display = "none";
     let axn;
-    for (const ta of axns) {
+    for (const a of axns) {
         if (a.checked) {
             axn = a.value;
             break;
         }
     }
-    console.log(axn);
+    console.log("axn = " + axn);
 
     switch (axn) {
-        case 1:
+        case "1":
+            console.log("@switch case 1 in getEmplAxnFunc");
+            document.getElementById("employeeportal").style.display = "none";
             document.getElementById("newreqform").style.display = "block";
             document.getElementById("submitnewrequest").addEventListener("click", addFunc);
+            //document.getElementById("newreqform").style.display = "none";
             break;
-        case 2:
+        case "2":
             viewPendingFunc()
             break;
-        case 3:
+        case "3":
             //addFuxn();
             break;
-        case 4:
+        case "4":
             logoutFuxn();
             break;
     }
@@ -97,12 +89,9 @@ function getEmpAxnFunc(){
 
 async function addFunc() {
     console.log("@addFunc");
-    let email = document.getElementById("email").value;
-    console.log(email);
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
-    let author=uname;
-    
+   
     const types = document.querySelectorAll('input[name="type"]');
     //document.getElementById("employeeportal").style.display = "none";
     let typeId;
@@ -119,7 +108,7 @@ async function addFunc() {
         description: description,
         typeId: typeId,
         statusId: 1,
-        author: uname,       
+        author: usern,       
     }
 
     console.log(rReq)
@@ -132,7 +121,7 @@ async function addFunc() {
 
     console.log(resp);
 
-    if (resp.status === 201) {
+    if (resp.status === 200) {
         alert('Your request was successfully submitted');
         console.log("Request was successgully submitted.")
         showRFunc();

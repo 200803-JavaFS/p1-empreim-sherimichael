@@ -1,73 +1,15 @@
 const url = "http://localhost:8080/project1/"
 
-// Method = GET
-//document.getElementById("viewopen").addEventListener("click", viewPendingFunc);
-//document.getElementById("viewclosed").addEventListener("click", viewPastFunc);
-
-//Method = POST
-document.getElementById("loginbtn").addEventListener("click", loginFunc);
-//document.getElementById("submitnewrequest").onsubmit=addFunc() 
-//document.getElementById("logoutbtn").addEventListener("click", loginFunc);
-
-//Method = PUT
-//document.getElementById("changestatus").addEventListener("click", loginFunc);
-
-async function loginFunc() {
-    console.log("@loginFunc");
-
-    let usern = document.getElementById("username").value;
-    let userp = document.getElementById("password").value;
-
-    let user = {
-        username: usern,
-        password: userp
-    }
-
-    //console.log(user);
-
-    let resp = await fetch(url + "login", {
-        method: 'POST',
-        body: JSON.stringify(user),
-        credentials: 'include'
-    })
-
-    console.log(resp);
-
-    if (resp.status == 200) {
-        document.getElementById("login-row").innerText = "You have successfully logged in.";
-        let data = await resp.text();
-        console.log(resp);
-        let uRoleId = data;
-        sessionStorage.setItem("uRoleId", uRoleId);
-        console.log(uRoleId);
-        if (uRoleId == 1) {
-            showEmployeeForm();
-            
-
-        } else if (uRoleId == 2) {
-            console.log("finance manager page");
-            window.location.href = 'financemanager.html'; //https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage
-        } else { console.log("Holy Cow, Batman!"); }
-    } else {
-        resetLogin();
-    }
-}
-
-function showEmployeeForm(){
-    console.log("@showEmployeeForm");
-    location.href = 'employee.html';
-    console.log("@employee.html");
-    let submitNew = document.getElementById("submitnewrequest");
-    submitNew.addEventListener("click", addFunc);
-}
+document.getElementById("submitnewrequest").addEventListener("click", addFunc);
 
 async function addFunc() {
-    console.log("in addFunc");
+    console.log("@addFunc in newrequest.js");
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
-    let tId = document.getElementById("type").value; //https://stackoverflow.com/questions/1085801/get-selected-value-in-dropdown-list-using-javascript
-    var typeId = tId.options[tId.selectedIndex].value;
-    let author = uId;
+    
+    let typeId=document.getElementById("rtype").getRadioVal(value, 'type');
+    console.log(typeId);
+    let author = 0;
 
 
     let rReq = {
@@ -86,12 +28,14 @@ async function addFunc() {
         credentials: "include"
     })
 
+    console.log(resp);
+
     if (resp.status === 201) {
         alert('Your request was successfully submitted');
         console.log("Request was successgully submitted.")
         //showRFunc()
     } else {
-        document.getElementById("new-msg").innerText = "Request was not successfully submitted.";
+        console.log("Request was not successfully submitted.");
     }
 }
 
@@ -160,10 +104,4 @@ async function viewPendingFunc() {
         body: JSON.stringify(uId),
         credentials: 'include'
     })
-}
-
-function resetLogin() {
-    console.log("@resetLogin");
-    document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging in again.";
-    //location.reload();
 }

@@ -29,7 +29,7 @@ body {
     margin-top: -85px;
 }
 
-#employee .container-employee #employee-row #employee-column #employee-box #employee-form {
+#employeeportal .container-employee #employee-row #employee-column  #employee-box #employee-form{
     margin-top: 80px;
     max-width: 500px;
     height: 250px;
@@ -37,14 +37,34 @@ body {
     background-color: #EAEAEA;
 }
 
-#employee .container-employee #employee-row #employee-column #employee-box #employee-form {
+#employeeportal .container-employee #employee-row #employee-column #employee-box #employee-form {
     padding: 20px;
 }
 
-#employee .container-employee #employee-row #employee-column #employee-box #employee-form {
+#employeeportal .container-employee #employee-row #employee-column #employee-box #employee-form {
     margin-top: 90px;
 }
 
-#login .container #login-row #login-column #login-box #login-form #newreq-text{
+#employeeportal .container-employee #employee-row #employee-column #employee-box #employee-form #newreq-text{
     margin-top: 30px;
+}
+
+#newrequest .container #login-row #login-column #login-box {
+    margin-top: 50px;
+    max-width: 650px;
+    height: 400px;
+    border: 1px solid #9C9C9C;
+    background-color: #EAEAEA;
+}
+
+#form-group {
+    margin-top: 200px;
+}
+
+#newrequest .container #login-row #login-column #login-box #login-form {
+    padding: 20px;
+}
+
+#newrequest .container #login-row #login-column #login-box #login-form #register-link {
+    margin-top: -85px;
 }

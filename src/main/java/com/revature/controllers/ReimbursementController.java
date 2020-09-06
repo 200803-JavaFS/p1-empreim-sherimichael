@@ -15,6 +15,7 @@ import com.revature.dao.UserDao;
 import com.revature.models.Reimbursement;
 import com.revature.models.inputRDTO;
 import com.revature.services.ReimbursementServices;
+import com.revature.services.UserServices;
 
 public class ReimbursementController {
 	
@@ -82,6 +83,8 @@ public class ReimbursementController {
 		String body = new String(sb);
 		
 		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
+		UserServices us = new UserServices();
+		
 		if(rs.addReimbursement(rDTO)) {
 			res.setStatus(201);
 			res.getWriter().println("Reimbursement Request Added");

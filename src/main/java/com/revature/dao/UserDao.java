@@ -66,6 +66,23 @@ public class UserDao implements UserDaoIf {
 		return null;	
 	}
 	
+	@Override
+	public User findByEmail(String email) {
+		log.info("@findByEmail in UserDao");
+		Session ses = HibernateUtil.getSession();
+		try {
+			List<User> us = ses.createQuery("from User where email ='" + email+"'",User.class).list();
+			//System.out.println("@findByEmail in UDao List<User> us = " + us);
+			//System.out.println("@findByEMail in UDao email= " + email);
+			return us.get(0);
+		}
+		catch(HibernateException e) {
+			e.printStackTrace();
+		}
+		
+		return null;	
+	}
+	
 	public boolean addUser(User u) {
 		log.info("@addUser in UserDao");
 		Session ses = HibernateUtil.getSession();

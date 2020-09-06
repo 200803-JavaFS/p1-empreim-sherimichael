@@ -6,6 +6,7 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 
 import com.revature.models.Reimbursement;
+import com.revature.models.User;
 import com.revature.utils.HibernateUtil;
 
 public class ReimbursementDao implements ReimbursementDaoIf {
@@ -97,6 +98,10 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 		
 		@Override
 		public boolean addReimbursement(Reimbursement r) {
+		
+			Reimbursement newR = new Reimbursement();
+			
+			
 			Session ses = HibernateUtil.getSession();
 			try {
 				ses.save(r);

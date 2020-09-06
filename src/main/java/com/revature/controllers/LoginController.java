@@ -37,6 +37,14 @@ public class LoginController {
 				String body = new String(sb);
 
 				LoginDTO l = om.readValue(body, LoginDTO.class);
+				/*
+				 * LoginDTO l = new LoginDTO();
+				 l.username = req.getParameter("username");
+                l.password = req.getParameter("password");
+                
+                System.out.println(l.username);
+                System.out.println(l.password);
+                */
 
 				if (ls.login(l)) {
 					HttpSession ses = req.getSession();

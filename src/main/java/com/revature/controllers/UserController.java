@@ -13,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.dao.UserDao;
 import com.revature.models.User;
+import com.revature.models.inputRDTO;
 import com.revature.services.UserServices;
 
 public class UserController {
@@ -43,8 +44,21 @@ public class UserController {
 		}
 	}
 	
-	public void getUByUsername(HttpServletResponse res, String email) throws IOException {
+	public void getUByUsername(HttpServletResponse res, String username) throws IOException {
 		log.info("@getUByUsername in UserController");
+		
+		User u = us.findByUsername(username);
+		if (u == null) {
+			res.setStatus(204);
+		}else {
+			res.setStatus(204);
+			String json = om.writeValueAsString(u);
+			res.getWriter().println(json);			
+		}
+	}
+	
+	public void getUByEmail(HttpServletResponse res, String email) throws IOException {
+		log.info("@getUByEmail in UserController");
 		
 		User u = us.findByUsername(email);
 		if (u == null) {
@@ -55,6 +69,25 @@ public class UserController {
 			res.getWriter().println(json);			
 		}
 	}
+	
+	public void getByEmail(String body) throws IOException {
+		log.info("@getByEmail in UserController");
+		inputRDTO rDTO = om.readValue(body, inputRDTO.class);
+		System.out.println("@getByEmail in UC rDTO = " + rDTO);
+		
+		/*
+		User u = us.findByUsername(email);
+		if (u == null) {
+			res.setStatus(204);
+		}else {
+			res.setStatus(204);
+			String json = om.writeValueAsString(u);
+			res.getWriter().println(json);			
+		}
+		*/
+	}
+	
+	
 		
 	public void addU(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		log.info("@gaddU in UserController");

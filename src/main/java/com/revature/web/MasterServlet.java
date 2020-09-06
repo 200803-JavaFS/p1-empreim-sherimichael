@@ -1,4 +1,5 @@
 package com.revature.web;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -12,6 +13,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.revature.controllers.LoginController;
 import com.revature.controllers.ReimbursementController;
+import com.revature.controllers.UserController;
 import com.revature.controllers.UserRoleController;
 import com.revature.dao.UserDao;
 import com.revature.models.LoginDTO;
@@ -26,6 +28,7 @@ public class MasterServlet extends HttpServlet{
 	private static ReimbursementController rc = new ReimbursementController();
 	private static LoginController lc = new LoginController();
 	private static UserRoleController urc = new UserRoleController();
+	private static UserController uc = new UserController();
 	private static UserDao uDao = new UserDao();
 	
 	private static UserServices us = new UserServices();
@@ -71,36 +74,43 @@ public class MasterServlet extends HttpServlet{
 
 	@Override
 	protected void doPost (HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
-		doGet(req,res);
-		
+		log.info("@doPost in MasterServlet");
 		/*
 		 * functionalities: login, logout, & employees can submit new reimbursement requests
 		 */
 		
-		res.setContentType("application/json");
-		
-		res.setStatus(404);
-
 		final String URI = req.getRequestURI().replace("/project1/", "");
 
 		String[] portions = URI.split("/");
-
-		System.out.println(Arrays.toString(portions));
 		
-		try {
-			switch (portions[0]) {
+		System.out.println("@MS URI=" + URI);
+
+		// JSON content type
+		res.setContentType("application/json");
+
+		BufferedReader reader = req.getReader();
+
+		StringBuilder sb = new StringBuilder();
+
+		String line = reader.readLine();
+		while (line != null) {
+			sb.append(line);
+			line = reader.readLine();
+		}
+		String body = new String(sb);
+		res.setStatus(404);
+		System.out.println("@MS body = " + body);
+		
+		
+			try {
+				switch (portions[0]) {
 			
-			case "login":
+				case "login":
 				log.info("@login in doPost at MasterServletSwitch");
 				lc.login(req, res);	
 				break;
 				
-			case "reimbursement":
-				log.info("@newrequest in doPost at MasterServletSwitch");
-				rc.addR(req, res);
-				break;
-				
-			case "logout":
+				case "logout":
 				log.info("@logout in doPost at MasterServletSwitch");
 				lc.logout(req, res);
 				break;

@@ -5,15 +5,15 @@ public class inputRDTO {
 	private int reimId;
 	private double amount;
 	private String description;
-	private ReimbursementType typeId;
-	private ReimbursementStatus statusId;
-	public User author;
+	private int typeId;
+	private int statusId;
+	public String author;
 	
 	public inputRDTO() {
 		super();
 	}
 
-	public inputRDTO(double amount, String description, ReimbursementType typeId,ReimbursementStatus statusId, User author) {
+	public inputRDTO(double amount, String description, int typeId,int statusId, String author) {
 		super();
 		this.amount = amount;
 		this.description = description;
@@ -22,8 +22,8 @@ public class inputRDTO {
 		this.author = author;		
 	}
 	
-	public inputRDTO(int reimId, double amount, String description, ReimbursementType typeId,
-			ReimbursementStatus statusId, User author) {
+	public inputRDTO(int reimId, double amount, String description, int typeId,
+			int statusId, String author) {
 		super();
 		this.reimId = reimId;
 		this.amount = amount;
@@ -57,31 +57,30 @@ public class inputRDTO {
 		this.description = description;
 	}
 
-	public ReimbursementType getTypeId() {
+	public int getTypeId() {
 		return typeId;
 	}
 
-	public void setTypeId(ReimbursementType typeId) {
+	public void setTypeId(int typeId) {
 		this.typeId = typeId;
 	}
 
-	public ReimbursementStatus getStatusId() {
+	public int getStatusId() {
 		return statusId;
 	}
 
-	public void setStatusId(ReimbursementStatus statusId) {
+	public void setStatusId(int statusId) {
 		this.statusId = statusId;
 	}
 
-	public User getAuthor() {
+	public String getAuthor() {
 		return author;
 	}
 
-	public void setAuthor(User author) {
+	public void setAuthor(String author) {
 		this.author = author;
 	}
 
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -91,8 +90,9 @@ public class inputRDTO {
 		result = prime * result + (int) (temp ^ (temp >>> 32));
 		result = prime * result + ((author == null) ? 0 : author.hashCode());
 		result = prime * result + ((description == null) ? 0 : description.hashCode());
-		result = prime * result + ((statusId == null) ? 0 : statusId.hashCode());
-		result = prime * result + ((typeId == null) ? 0 : typeId.hashCode());
+		result = prime * result + reimId;
+		result = prime * result + statusId;
+		result = prime * result + typeId;
 		return result;
 	}
 
@@ -117,15 +117,11 @@ public class inputRDTO {
 				return false;
 		} else if (!description.equals(other.description))
 			return false;
-		if (statusId == null) {
-			if (other.statusId != null)
-				return false;
-		} else if (!statusId.equals(other.statusId))
+		if (reimId != other.reimId)
 			return false;
-		if (typeId == null) {
-			if (other.typeId != null)
-				return false;
-		} else if (!typeId.equals(other.typeId))
+		if (statusId != other.statusId)
+			return false;
+		if (typeId != other.typeId)
 			return false;
 		return true;
 	}

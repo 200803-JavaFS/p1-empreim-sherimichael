@@ -9,6 +9,7 @@ public interface UserDaoIf {
 	public List<User> findAll();
 	public User findByUId(int id);
 	public User findByUsername(String username);
+	public User findByEmail(String email);
 	public boolean addUser(User u);	
 	public boolean updateUser(User u);
 

@@ -41,10 +41,155 @@
             </div>
         </div>
     </div>
+    <div id="employeeportal">
+        <h3 id="welcome-row" class="row justify-content-center align-items-center text-white">Squirrel Dog Enterprises</h3>
+        <h4 id="welcome-row2" class="row justify-content-center align-items-center text-white">Reinbursement Requests Employee Portal</h4>
+        <div class="container-employee text-center">
+            <div id="employee-row" class="row justify-content-center align-items-center">
+                <div id="employee-column" class="col-md-6">
+                    <div id="employee-box" class="col-md-12">
+                        <div id="employee-form" class="form" action="" method="post">
+                            <div id="rtype" class="text-center text-info rtype">
+                                <p>What would you like to do?</p>
+                                <div>
+                                  <input class="text-info" type="radio" id="empaxn1"
+                                   name="empaxn" value="1">
+                                  <label for=""empaxn1>Submit New Reimbursement Request</label>
+                              
+                                  <input class="text-info" type="radio" id="empaxn2"
+                                   name="empaxn" value="2">
+                                  <label for="empaxn2">View Pending Requests</label>
+                              
+                                  <input class="text-info" type="radio" id="empaxn3"
+                                   name="empaxn" value="3">
+                                  <label for="empaxn3">View Resolved Requests</label>
+
+                                  <input class="text-info" type="radio" id="empaxn4"
+                                   name="empaxn" value="4">
+                                  <label for="empaxn4">Logout</label>
+
+                                  <input id = "submit" type="submit" class="text-info" onsubmit="document.getElementById('submit').style.display = 'none'" value="Send Request">
+                                  <label>Submit</label>
+                                </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="newreqform">
+        <h3 id="welcome-row" class="row justify-content-center align-items-center text-white">Squirrel Dog Enterprises</h3>
+        <h3 id="welcome2-row" class="row justify-content-center align-items-center text-white">Employee New Reimbursement Request Form</h3>
+        <div class="container align-items-center">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <div id="login-form" class="form" action="" method="post">
+                            <h5 class="text-center text-info">Please complete the following:</h5>
+                            <div id="newreq-text" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span  class="input-group-text text-info">Email:</span>
+                                </div>
+                                  <input id="email" type="text" class="form-control">
+                            </div>
+                            <div id="newreq-text" class="input-group mb-3">
+                                <div class="input-group-prepend">
+                                    <span  class="input-group-text text-info">Amount Requested: $</span>
+                                </div>
+                                  <input id="amount" type="number" step=.01 class="form-control">
+                            </div>
+                            <div id="rtype" class="text-center text-info rtype">
+                                <p>Select Reimbursement Type:</p>
+                                <div>
+                                  <input class="text-info" type="radio" id="reimbursementType1"
+                                   name="type" value="1">
+                                  <label for="reimbursementType1">LODGING</label>
+                              
+                                  <input class="text-info" type="radio" id="reimbursementType2"
+                                   name="type" value="2">
+                                  <label for="reimbursementType2">TRAVEL</label>
+                              
+                                  <input class="text-info" type="radio" id="reimbursementType3"
+                                   name="type" value="3">
+                                  <label for="reimbursementType3">FOOD</label>
+
+                                  <input class="text-info" type="radio" id="reimbursementType4"
+                                   name="type" value="4">
+                                  <label for="reimbursementType4">OTHER</label>
+                            </div>
+                            <div class="form-group">
+                                <label for="textarea" class="text-info">Brief description for Request:</label>
+                                <textarea class="form-control" id="description" rows="2"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <input id="submitnewrequest" onsubmit="document.getElementById('newreqform').style.display = 'none'" type="submit" name="submit" style="width:100%" class="btn btn-info btn-md" value="submit">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="showreimbursement">
+        <h2 id="welcome-row" class="row justify-content-center align-items-center text-white">Welcome to</h2>
+        <h2 id="welcome2-row" class="row justify-content-center align-items-center text-white">Squirrel Dog Enterprises</h2>
+        <h5 id="new-msg" class="row justify-content-center align-items-center text-black"></h5>
+        <div id="container" class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <div id="login-form" class="row" id="table-row">
+                            <h3 id=login-box-text" class="text-center text-info ">Reimbursement Request</h3>
+                            <table class="table-hover table-bordered" id="avtable">
+                                <thead>
+                                    <tr>
+                                        <th>ReimId</th>
+                                        <th>Amount</th>
+                                        <th>Date Submitted</th>
+                                        <th>Date Resolved</th>
+                                        <th>Description</th>
+                                        <th>Author</th>
+                                        <th>Resolver</th>
+                                        <th>StatusId</th>
+                                        <th>TypeId</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rbody">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script>
     <script src="index.js "></script>
+
+
+    <div class="row" id="table-row">
+        <table class="table-hover table-bordered" id="avtable">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Superhero Name</th>
+                    <th>Superpower</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Power Level</th>
+                    <th>Home Base</th>
+                </tr>
+            </thead>
+            <tbody id="avbody">
+            </tbody>
+        </table>
+    </div>
+
 </body>
 
 </html>

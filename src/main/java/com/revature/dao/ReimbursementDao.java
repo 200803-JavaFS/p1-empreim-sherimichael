@@ -60,6 +60,15 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 			return null;
 		}
 		
+		@SuppressWarnings("unchecked")
+		@Override
+		public List<Reimbursement> findRByAuthor(int author) {
+				
+			Session ses = HibernateUtil.getSession();
+			List<Reimbursement> tickets = ses.createQuery("FROM Reimbursement WHERE author=" +author).list();
+			return tickets;
+		}
+		
 		@Override
 		public List<Reimbursement> findByUser(int author) {
 			Session ses = HibernateUtil.getSession();
@@ -106,4 +115,5 @@ public class ReimbursementDao implements ReimbursementDaoIf {
 				return false;
 			}
 		}
+
 }

@@ -31,7 +31,7 @@ async function loginFunc() {
 
     if (resp.status == 200) {
         document.getElementById("new-msg").innerText = "You have successfully logged in.";
-        let data = await resp.text();
+        let data = await resp.json();
         console.log(resp);
         let uRoleId = data;
         sessionStorage.setItem("uRoleId", uRoleId);

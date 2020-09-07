@@ -10,6 +10,7 @@ public interface ReimbursementDaoIf {
 	public Reimbursement findByRId(int id);
 	public List<Reimbursement> findByUser(int author);
 	public List<Reimbursement> findByRStatus(int statusId);
+	public List<Reimbursement> findRByAuthor(int author);
 	public boolean addReimbursement(Reimbursement addR);
 	public boolean updateReimbursement(Reimbursement updateR);
 	

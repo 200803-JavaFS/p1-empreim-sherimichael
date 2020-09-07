@@ -42,6 +42,7 @@ public class LoginController {
 					ses.setAttribute("loggedin", true);
 					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId().getRoleId());
 					res.setStatus(200);
+					System.out.println("in LC se = " + ses);
 					String json = om.writeValueAsString((Integer)ses.getAttribute("user_role_id"));
 					res.getWriter().println(json);
 				} else {
@@ -54,7 +55,7 @@ public class LoginController {
 				}			
 		}
 
-	public void logout(HttpServletRequest req, HttpServletResponse res, String body) throws IOException {
+	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
 		HttpSession ses = req.getSession(false);
 
 		if (ses != null) {

@@ -6,6 +6,7 @@ import com.revature.dao.RStatusDao;
 import com.revature.dao.RTypeDao;
 import com.revature.dao.ReimbursementDao;
 import com.revature.dao.UserDao;
+import com.revature.models.LoginDTO;
 import com.revature.models.Reimbursement;
 import com.revature.models.ReimbursementStatus;
 import com.revature.models.inputRDTO;
@@ -30,6 +31,10 @@ public class ReimbursementServices {
 		return rDao.findByRStatus(statusId);
 	}
 	
+	public List<Reimbursement> findRByAuthor(int author) {
+		return rDao.findRByAuthor(author);	
+	}
+
 	public boolean addReimbursement(inputRDTO rDTO) {
 			Reimbursement r = new Reimbursement();
 			int amount = Integer.parseInt(rDTO.amount);

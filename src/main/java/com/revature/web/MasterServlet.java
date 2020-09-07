@@ -1,4 +1,5 @@
 package com.revature.web;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.Arrays;
 
@@ -6,12 +7,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import com.revature.controllers.LoginController;
 import com.revature.controllers.ReimbursementController;
+import com.revature.models.inputRDTO;
 
 
 public class MasterServlet extends HttpServlet{
@@ -44,19 +47,41 @@ public class MasterServlet extends HttpServlet{
 
 		System.out.println(Arrays.toString(portions));
 		System.out.println(portions.length);
+		System.out.println((portions[0]));
 		
-		if ((portions[0]).equals("reimbursement")) {
-			log.info("@ifportions in MS");
-			if(req.getMethod().equals("GET")) {
-				rc.getAll(res);
-			} else {
-				res.setStatus(403);
-				res.getWriter().println("You must be logged in to do that!");
+		HttpSession ses = req.getSession(false);
+		System.out.println("@MS ses = " + ses);
+		if (ses != null && (boolean) ses.getAttribute("loggedin")==true) {
+		try {
+			switch (portions[0]) {
+				
+				case "reimbursement":
+					if(req.getMethod().equals("GET")) {
+						rc.getAll(res);
+					}
+					break;				
+				case "reimbursementsbystatus":
+					int rsId = Integer.parseInt(portions[1]);
+					rc.getRByStatus(res, rsId);
+					break;
+				case "reimbursementsbyemployee":
+					int empId = Integer.parseInt(portions[1]);
+					rc.findRByAuthor(res, empId);
+					break;
+				case "empreimbursementsearch":
+					System.out.println("@case emprsearch in MS");
+					rc.findByUname(req, res);
+					break;
 			}
-		} else {
-		res.setStatus(400);
-		}	 
+		} catch (NumberFormatException e) {
+			e.printStackTrace();
+			res.setStatus(400);
+		}
+		}
+
 	}
+		
+	
 		
 
 	@Override
@@ -84,15 +109,10 @@ public class MasterServlet extends HttpServlet{
 					log.info("@addR in doPost at MasterServletSwitch");
 					rc.addR(req, res);
 					break;
-					
-				case "changeStatus":
-					log.info("@changeStatus in doPost at MasterServletSwitch");
-					rc.updateR(req, res);
-					break;
 				
 				case "logout":
 					log.info("@logout in doPost at MasterServletSwitch");
-					//lc.logout(req, res);
+					lc.logout(req, res);
 					break;
 			}
 
@@ -121,10 +141,11 @@ public class MasterServlet extends HttpServlet{
 
 		System.out.println(Arrays.toString(portions));
 		
-		if (URI.equals("request")) {
-			log.info("@request in duPut at MasterServletSwitch");
-			//rc.method			
+		if (URI.equals("changestatus")) {
+			log.info("@uchangeStatus in PUT of MS");
+				rc.updateR(req, res);	
 		}
+		
 		
 		
 

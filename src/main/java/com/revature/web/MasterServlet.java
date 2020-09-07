@@ -12,12 +12,7 @@ import org.apache.logging.log4j.Logger;
 
 import com.revature.controllers.LoginController;
 import com.revature.controllers.ReimbursementController;
-import com.revature.controllers.UserController;
-import com.revature.controllers.UserRoleController;
-import com.revature.dao.UserDao;
-import com.revature.models.LoginDTO;
-import com.revature.models.User;
-import com.revature.services.UserServices;
+
 
 public class MasterServlet extends HttpServlet{
 	
@@ -48,15 +43,12 @@ public class MasterServlet extends HttpServlet{
 		String[] portions = URI.split("/");
 
 		System.out.println(Arrays.toString(portions));
+		System.out.println(portions.length);
 		
 		if ((portions[0]).equals("reimbursement")) {
-			if (req.getSession(false) != null && (boolean) req.getSession().getAttribute("Loggedin")) {
-				if (portions.length == 2) {
-					int reimbId = Integer.parseInt(portions[1]);
-					rc.getRById(res, reimbId);
-				} else if (portions.length == 1) {
-					rc.getAll(res);
-				}
+			log.info("@ifportions in MS");
+			if(req.getMethod().equals("GET")) {
+				rc.getAll(res);
 			} else {
 				res.setStatus(403);
 				res.getWriter().println("You must be logged in to do that!");

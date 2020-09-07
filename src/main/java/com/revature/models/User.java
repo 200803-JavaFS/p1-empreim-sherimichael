@@ -13,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="users", schema = "project1")
 public class User implements Serializable{
@@ -39,7 +40,7 @@ public class User implements Serializable{
 	@Column(name="email", nullable=false, unique=true)
 	private String email;
 	
-	@ManyToOne(fetch=FetchType.LAZY, cascade = CascadeType.ALL)
+	@ManyToOne(fetch=FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name="user_role_id", nullable=false)
 	private UserRole userRoleId;
 	

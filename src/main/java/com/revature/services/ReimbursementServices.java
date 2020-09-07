@@ -29,9 +29,7 @@ public class ReimbursementServices {
 	public List<Reimbursement> findByRStatus(int statusId) {
 		return rDao.findByRStatus(statusId);
 	}
-	public List<Reimbursement> findByUserStatus(int author, int statusId) {
-		return rDao.findByUserStatus(author, statusId);
-	}
+	
 	public boolean addReimbursement(inputRDTO rDTO) {
 			Reimbursement r = new Reimbursement();
 			int amount = Integer.parseInt(rDTO.amount);

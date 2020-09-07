@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" id="bootstrap-css">
+    <link rel="stylesheet" href="style.css">
+    <title>Employee Login</title>
+
+</head>
+
+<body>
+    
+    <div id="findfunc" class="container">
+        <header class="jumbotron" style="background:#EAEAEA">
+            <h1>Finance Manager Reimbursement Request Portal</h1>
+        </header>
+        <div class="row" id="table-row">
+            <div class="col">
+                <h3>View All Reimbursements</h3>
+                <button id="findfuncbtn"  class="btn">List All Reimbursements</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn1" type = "submit" class="btn">View All Pending Reimbursements</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn2" class="btn">View By Employee</button>
+            </div>
+            <div class="col">
+                <button id="findfuncbtn3" class="btn">Update Reimbursement Status</button>
+            </div>
+        <table class="table-hover table-bordered" id="rtable">
+            <thead>
+                <tr>
+                    <th> Reimbursement Id </th>
+                    <th> Amount ($) </th>
+                    <th> Date Submitted </th>
+                    <th> Date Resolved </th>
+                    <th> Description </th>
+                    <th> Author </th>
+                    <th> Resolver </th>
+                    <th> Reimbursement Status </th>
+                    <th> Reimbursement Type </th>
+                </tr>
+            </thead>
+            <tbody id="rbody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="findfunc" class="container">
+        <header class="jumbotron" style="background:#EAEAEA">
+            <h1>Finance Manager Reimbursement Request Portal</h1>
+        </header>
+        <div class="row" id="table-row">
+        <table class="table-hover table-bordered" id="rtable">
+            <thead>
+                <tr>
+                    <th> Reimbursement Id </th>
+                    <th> Amount ($) </th>
+                    <th> Date Submitted </th>
+                    <th> Date Resolved </th>
+                    <th> Description </th>
+                    <th> Author </th>
+                    <th> Resolver </th>
+                    <th> Reimbursement Status </th>
+                    <th> Reimbursement Type </th>
+                </tr>
+            </thead>
+            <tbody id="rbody1">
+            </tbody>
+        </table>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js "></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js "></script>
+    <script src="index.js "></script>
+    <script src="finmanportal.js "></script>
+
+</body>
+
+</html>

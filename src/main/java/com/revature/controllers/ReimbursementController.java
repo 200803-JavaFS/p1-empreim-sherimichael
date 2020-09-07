@@ -6,7 +6,6 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -28,6 +27,7 @@ public class ReimbursementController {
 		log.info("@getAll in ReimbursementController");
 		
 		List<Reimbursement> allR = rs.findAll();
+		System.out.println("@getAll allR = " + allR);
 		
 		res.getWriter().println(om.writeValueAsString(allR));
 		res.setStatus(200);
@@ -54,15 +54,6 @@ public class ReimbursementController {
 		List<Reimbursement> allRStatus = rs.findByRStatus(statusId);
 		
 		res.getWriter().println(om.writeValueAsString(allRStatus));
-		res.setStatus(200);
-	}
-	
-	public void getRByAuthorStatus(HttpServletResponse res, int author, int statusId) throws IOException{
-		log.info("@getRByAuthorStatus in ReimbursementController");
-		
-		List<Reimbursement> userStatus = rs.findByUserStatus(author, statusId);
-		
-		res.getWriter().println(om.writeValueAsString(userStatus));
 		res.setStatus(200);
 	}
 	

@@ -124,12 +124,14 @@
             </div>
             <div class="form-group">
                 <input type="radio" id="approved" name="status" value="approved">
-                <label for="approved">If Approved change status to 2</label><br>
+                <label for="approved">Approved: change status to 2</label><br>
                 <input type="radio" id="denied" name="status" value="denied">
-                <label for="denied">If Denied change status to 3</label>
+                <label for="denied">Denied: change status to 3</label>
             </div>
-            <button id="updateStatusBtn" onclick="onClick(this)" type="submit" class="btn btn-secondary btn-md">Update</button>
-            <h6 id="updateSuccess"></h6>
+            <div>
+                <button id="updateStatusBtn" onclick="onClick(this)" type="submit" class="btn btn-secondary btn-md">Update</button>
+                <h6 id="updateSuccess"></h6>
+            </div>
         </div>
     </div>
 

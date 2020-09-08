@@ -54,7 +54,7 @@ async function findAllFunc() {
             let cell8 = document.createElement("td");
                 switch (reimbursement.statusId.statusId) {
                     case 1:
-                        cell8innerText = "Pending";
+                        cell8.innerText = "Pending";
                         row.appendChild(cell8);
                         break;
                     case 2:
@@ -231,7 +231,7 @@ async function findByStatusFunc(){
                 let cell8 = document.createElement("td");
                     switch (reimbursement.statusId.statusId) {
                         case 1:
-                            cell8innerText = "Pending";
+                            cell8.innerText = "Pending";
                             row.appendChild(cell8);
                             break;
                         case 2:

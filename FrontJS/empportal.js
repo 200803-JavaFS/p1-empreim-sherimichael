@@ -1,7 +1,3 @@
-const url = "http://localhost:8080/project1/"
-
-let usern = sessionStorage.getItem("uname");
-
 document.getElementById("findfuncbtn").addEventListener("click", findByEmployeeFunc);
 document.getElementById("findfuncbtn1").addEventListener("click", findByStatusFunc);
 document.getElementById("findfuncbtn2").addEventListener("click", addFunc);
@@ -29,7 +25,7 @@ async function findByEmployeeFunc(){
             console.log(reimbursement);
             let row = document.createElement("tr");
             let cell = document.createElement("td");
-            cell.innerHTML = reimbursement.reimbId;
+            cell.innerHTML = reimbursement.reimId;
             row.appendChild(cell);
             let cell2 = document.createElement("td");
             cell2.innerHTML = reimbursement.amount;
@@ -62,7 +58,7 @@ async function findByEmployeeFunc(){
             let cell8 = document.createElement("td");
                 switch (reimbursement.statusId) {
                     case 1:
-                        cell8innerText = "Pending";
+                        cell8.innerText = "Pending";
                         row.appendChild(cell8);
                         break;
                     case 2:
@@ -76,17 +72,17 @@ async function findByEmployeeFunc(){
                 }
                 row.appendChild(cell8);          
             let cell9 = document.createElement("td");
-                switch (reimbursement.typeId.typeId) {
-                    case 1:
+                switch (reimbursement.typeId) {
+                    case '1':
                         cell9.innerText = "Lodging";
                         break;
-                    case 2:
+                    case '2':
                         cell9.innerText = "Travel";
                         break;
-                    case 3:
+                    case '3':
                         cell9.innerText = "Food";
                         break;
-                    case 4:
+                    case '4':
                         cell9.innerText = "Other";
                     break;
                 }
@@ -192,7 +188,7 @@ async function findByStatusFunc(){
     let description = document.getElementById("description").value;
    
     const types = document.querySelectorAll('input[name="type"]');
-    //document.getElementById("employeeportal").style.display = "none";
+    
     let typeId;
     for (const t of types) {
         if (t.checked) {
@@ -226,19 +222,7 @@ async function findByStatusFunc(){
     } else {
         console.log("Request was not successfully submitted.");
     }
-    
-    async function logoutFunc() {
-        let resp = await fetch(url + "logout", {
-            method: "POST",
-            credentials: "include"
-        })
-        if (resp.status === 200) {
-            location.reload();
-        } else {
-            document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging out again.";
-        }
-    }
-}
+   }
 
     async function logoutFunc() {
         console.log("@logout in empportal.js");
@@ -252,4 +236,3 @@ async function findByStatusFunc(){
             document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging out again.";
         }
     }
-}

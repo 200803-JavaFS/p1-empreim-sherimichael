@@ -49,7 +49,7 @@ public class LoginController {
 					ses.setAttribute("loggedin", true);
 					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId().getRoleId());
 					res.setStatus(200);
-					System.out.println("in LC se = " + ses);
+					System.out.println("in LC ses = " + ses);
 					String json = om.writeValueAsString((Integer)ses.getAttribute("user_role_id"));
 					res.getWriter().println(json);
 				} else {

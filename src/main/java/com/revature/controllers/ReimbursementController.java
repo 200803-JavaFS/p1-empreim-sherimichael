@@ -132,6 +132,7 @@ public void findByUname(HttpServletRequest req, HttpServletResponse res) throws 
     User u = us.findByUsername(l.username);
     log.info("@fndByUname in RCon User u =" + u);
     List<Reimbursement> rList = rs.findRByAuthor(u.getUserId());
+    System.out.println(rList);
     List<inputRDTO> rDTOList = new ArrayList<>();
     res.setStatus(200);
     inputRDTO rDTO= new inputRDTO();

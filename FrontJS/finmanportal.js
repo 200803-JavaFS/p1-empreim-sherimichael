@@ -3,7 +3,7 @@ document.getElementById("findfuncbtn4").addEventListener("click", findAllFunc);
 document.getElementById("findfuncbtn5").addEventListener("click", findByStatusFunc);
 document.getElementById("findfuncbtn6").addEventListener("click", findByEmployeeFunc);
 document.getElementById("findfuncbtn7").addEventListener("click", updateFunc);
-document.getElementById("findfuncbtn8").addEventListener("click", updateFunc);
+document.getElementById("findfuncbtn8").addEventListener("click", logoutFunc);
 
 async function findAllFunc() {
     console.log("@findAllFunc");
@@ -266,9 +266,10 @@ async function findByStatusFunc(){
     }
 
         async function updateFunc(){
+            console.log("in updateFunc");
 
-            let rID = document.getElementById("reimbIdInput");
-            let rId = rID.value;
+            let rId = parseInt(document.getElementById("updateStatusBtn").value);
+            console.log("rId= " + rId);
         
             const rSArr = document.querySelectorAll('input[name="status"]');
             let sId;
@@ -278,12 +279,12 @@ async function findByStatusFunc(){
                     break;
                 }
             }
-        
+            console.log("newstatus id = " + sId);
             let rStatus = {
                 reimbId: rId,
                 statusId: sId
             }
-        
+            console.log("sId = " + sId);
             let resp = await fetch(url+"changestatus" + "/" + rId, {
                 method: 'POST',
                 body: JSON.stringify(rStatus),
@@ -294,6 +295,19 @@ async function findByStatusFunc(){
                 document.getElementById("updateSuccess").innerHTML = "Reimbursement update successful";
             } else {
                 document.getElementById("updateSuccess").innerHTML = "Reimbursement update failure";
+            }
+        }
+
+        async function logoutFunc() {
+            (console.log("in logoutFunc in FinMan"))
+            let resp = await fetch(url + "logout", {
+                method: "POST",
+                credentials: "include"
+            })
+            if (resp.status === 200) {
+                location.reload();
+            } else {
+                document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging out again.";
             }
         }
     

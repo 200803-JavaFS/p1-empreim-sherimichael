@@ -6,7 +6,7 @@ document.getElementById("findfuncbtn").addEventListener("click", findByEmployeeF
 document.getElementById("findfuncbtn1").addEventListener("click", findByStatusFunc);
 document.getElementById("findfuncbtn2").addEventListener("click", addFunc);
 document.getElementById("submitnewrequest").addEventListener("click", addFunc);
-document.getElementById("findfuncbtn4").addEventListener("click", logoutFunc);
+document.getElementById("findfuncbtn3").addEventListener("click", logoutFunc);
 
 
 //All Reimbursements by Employee
@@ -228,6 +228,20 @@ async function findByStatusFunc(){
     }
     
     async function logoutFunc() {
+        let resp = await fetch(url + "logout", {
+            method: "POST",
+            credentials: "include"
+        })
+        if (resp.status === 200) {
+            location.reload();
+        } else {
+            document.getElementById("new-msg").innerText = "Oops, something went wrong. Please try logging out again.";
+        }
+    }
+}
+
+    async function logoutFunc() {
+        console.log("@logout in empportal.js");
         let resp = await fetch(url + "logout", {
             method: "POST",
             credentials: "include"

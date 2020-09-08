@@ -36,8 +36,6 @@
                                     
                                 </div>
                                     <input id="statusIdInput" type="number" class="form-control">
-                        </div>
-                        <button id="getByStatusBtn" class="btn btn-outline-info">Submit</button>
                     </div>
                 </div>
             </div>
@@ -130,7 +128,7 @@
                 <input type="radio" id="denied" name="status" value="denied">
                 <label for="denied">If Denied change status to 3</label>
             </div>
-            <button id="updateStatusBtn" class="btn btn-outline-success">Update</button>
+            <button id="updateStatusBtn" onclick="onClick(this)" type="submit" class="btn btn-secondary btn-md">Update</button>
             <h6 id="updateSuccess"></h6>
         </div>
     </div>

@@ -1,9 +1,9 @@
-const url = "http://localhost:8080/project1/"
 
-document.getElementById("findfuncbtn").addEventListener("click", findAllFunc);
-document.getElementById("findfuncbtn1").addEventListener("click", findByStatusFunc);
-document.getElementById("findfuncbtn2").addEventListener("click", findByEmployeeFunc);
-document.getElementById("findfuncbtn3").addEventListener("click", updateFunc());
+document.getElementById("findfuncbtn4").addEventListener("click", findAllFunc);
+document.getElementById("findfuncbtn5").addEventListener("click", findByStatusFunc);
+document.getElementById("findfuncbtn6").addEventListener("click", findByEmployeeFunc);
+document.getElementById("findfuncbtn7").addEventListener("click", updateFunc);
+document.getElementById("findfuncbtn8").addEventListener("click", updateFunc);
 
 async function findAllFunc() {
     console.log("@findAllFunc");
@@ -53,13 +53,10 @@ async function findAllFunc() {
             }
             let cell8 = document.createElement("td");
                 switch (reimbursement.statusId.statusId) {
-                   
-                    /*
-                        case 1:
+                    case 1:
                         cell8innerText = "Pending";
                         row.appendChild(cell8);
                         break;
-                    */
                     case 2:
                         cell8.innerText = "Approved";
                         row.appendChild(cell8);
@@ -263,9 +260,10 @@ async function findByStatusFunc(){
                         break;
                     }
                 row.appendChild(cell9);
-                document.getElementById("rbody1").appendChild(row);
+                document.getElementById("rbody2").appendChild(row);
             }
         }
+    }
 
         async function updateFunc(){
 
@@ -298,5 +296,5 @@ async function findByStatusFunc(){
                 document.getElementById("updateSuccess").innerHTML = "Reimbursement update failure";
             }
         }
-    }
+    
     

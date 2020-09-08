@@ -6,9 +6,7 @@ document.getElementById("findfuncbtn").addEventListener("click", findByEmployeeF
 document.getElementById("findfuncbtn1").addEventListener("click", findByStatusFunc);
 document.getElementById("findfuncbtn2").addEventListener("click", addFunc);
 document.getElementById("submitnewrequest").addEventListener("click", addFunc);
-document.getElementById("findfuncbtn3").addEventListener("click", logoutFunc);
-
-
+document.getElementById("findfuncbtn4").addEventListener("click", logoutFunc);
 
 
 //All Reimbursements by Employee
@@ -93,12 +91,12 @@ async function findByEmployeeFunc(){
                     break;
                 }
             row.appendChild(cell9);
-            document.getElementById("rbody1").appendChild(row);
+            document.getElementById("rbody").appendChild(row);
         }
     }
 }
 
-    //View By Status
+//View By Status
 
 async function findByStatusFunc(){
     console.log("@findByStatusFunc");
@@ -228,7 +226,7 @@ async function findByStatusFunc(){
     } else {
         console.log("Request was not successfully submitted.");
     }
-
+    
     async function logoutFunc() {
         let resp = await fetch(url + "logout", {
             method: "POST",

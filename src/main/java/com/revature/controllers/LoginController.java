@@ -8,18 +8,25 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.revature.dao.UserDao;
 import com.revature.models.LoginDTO;
 import com.revature.services.LoginService;
 import com.revature.services.UserServices;
 
 public class LoginController {
 	
+	private static final Logger log = LogManager.getLogger(UserDao.class);
+	
 	private static LoginService ls = new LoginService();
 	private static UserServices us = new UserServices();
 	private static ObjectMapper om = new ObjectMapper();
 	
 	public void login(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		log.info("@Login Controller");
 		
 		BufferedReader reader = req.getReader();
 
@@ -56,6 +63,8 @@ public class LoginController {
 		}
 
 	public void logout(HttpServletRequest req, HttpServletResponse res) throws IOException {
+		log.info("@Logout Controller");
+		
 		HttpSession ses = req.getSession(false);
 
 		if (ses != null) {

@@ -55,7 +55,9 @@ public class ReimbursementServices {
 		ReimbursementStatus rs = rsDao.findByStatusId(rDTO.statusId);
 		r.setStatusId(rs);
 		r.setResolver(uDao.findByUsername(rDTO.author));
-		rDao.updateReimbursement(r);
+		if (rDao.updateReimbursement(r)) {
+			return true;
+		}
 		return false;
 	}
 }

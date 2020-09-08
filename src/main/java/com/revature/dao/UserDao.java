@@ -55,8 +55,8 @@ public class UserDao implements UserDaoIf {
 		Session ses = HibernateUtil.getSession();
 		try {
 			List<User> us = ses.createQuery("from User where username ='" + username+"'",User.class).list();
-			//System.out.println("@findByUsername in UDao List<User> us = " + us);
-			//System.out.println("@findByUsername in UDao username = " + username);
+			System.out.println("@findByUsername in UDao List<User> us = " + us);
+			System.out.println("@findByUsername in UDao username = " + username);
 			return us.get(0);
 		}
 		catch(HibernateException e) {

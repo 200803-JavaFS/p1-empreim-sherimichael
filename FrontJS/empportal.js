@@ -102,6 +102,7 @@ async function findByStatusFunc(){
     let rStatus = document.getElementById("statusIdInput");
     let rsId = rStatus.value;
     console.log("rsId = " + rsId);
+    
 
     let resp = await fetch(url+"reimbursementsbystatus" + "/" + rsId , {
         credentials: 'include'
@@ -186,7 +187,8 @@ async function findByStatusFunc(){
     console.log("@addFunc");
     let amount = document.getElementById("amount").value;
     let description = document.getElementById("description").value;
-   
+    let usern = sessionStorage.getItem("uname");
+    
     const types = document.querySelectorAll('input[name="type"]');
     
     let typeId;

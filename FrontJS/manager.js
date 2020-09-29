@@ -1,11 +1,11 @@
 
-document.getElementById("findfuncbtn4").addEventListener("click", findAllFunc);
-document.getElementById("findfuncbtn5").addEventListener("click", findByStatusFunc);
-document.getElementById("findfuncbtn6").addEventListener("click", findByEmployeeFunc);
+document.getElementById("findfuncbtn4").addEventListener("click", findAll);
+document.getElementById("findfuncbtn5").addEventListener("click", findByStatus);
+document.getElementById("findfuncbtn6").addEventListener("click", findByEmployee);
 document.getElementById("findfuncbtn7").addEventListener("click", updateFunc);
-document.getElementById("findfuncbtn8").addEventListener("click", logoutFunc);
+document.getElementById("findfuncbtn8").addEventListener("click", logout);
 
-async function findAllFunc() {
+async function findAll() {
     console.log("@findAllFunc");
 
     document.getElementById("rbody").innerText = "";
@@ -91,7 +91,7 @@ async function findAllFunc() {
         }
     }
 }
-async function findByStatusFunc(){
+async function findByStatus(){
     console.log("@findByStatusFunc");
 
     document.getElementById("rbody1").innerText = "";
@@ -100,7 +100,7 @@ async function findByStatusFunc(){
     let rsId = rStatus.value;
     console.log("rsId = " + rsId);
 
-    let resp = await fetch(url+"reimbursementsbystatus" + "/" + rsId , {
+    let resp = await fetch(url+"status" + "/" + rsId , {
         credentials: 'include'
     
     });
@@ -178,7 +178,7 @@ async function findByStatusFunc(){
         }
     }
 
-    async function findByEmployeeFunc(){
+    async function findByEmployee(){
         console.log("@findEmployeeFunc");
 
     document.getElementById("rbody2").innerText = "";
@@ -187,7 +187,7 @@ async function findByStatusFunc(){
     let empId = employee.value;
     console.log("empId = " + empId);
 
-    let resp = await fetch(url+"reimbursementsbyemployee" + "/" + empId  , {
+    let resp = await fetch(url+"employee" + "/" + empId  , {
         credentials: 'include'
     
     });
@@ -298,7 +298,7 @@ async function findByStatusFunc(){
             }
         }
 
-        async function logoutFunc() {
+        async function logout() {
             (console.log("in logoutFunc in FinMan"))
             let resp = await fetch(url + "logout", {
                 method: "POST",

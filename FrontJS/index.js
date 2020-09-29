@@ -35,7 +35,7 @@ async function loginFunc() {
         sessionStorage.setItem("uRoleId", uRoleId);
         //console.log("URoleId: " + uRoleId);
         document.getElementById("login").setAttribute("hidden", true);
-        rtable.removeAttribute("hidden");
+        etable.removeAttribute("hidden");
         
         let button = document.createElement('button');
         button.className = "btn btn-success";
@@ -45,9 +45,33 @@ async function loginFunc() {
         document.getElementsByTagName("h1")[0].appendChild(button);
             
         if (uRoleId == 1) {
+            //view closed/resolved (approved & denied) requests
+            let cBtn = document.createElement('button');
+            cBtn.className = "btn btn-success";
+            cBtn.id = "closedBtn";
+            cBtn.innerText = "View Resolved Requests";
+            cBtn.onclick = resolvedRs;
+            cBtn.getElementsByTagName("h1")[0].appendChild(cBtn);
+
+            //view pending requests
+            let pBtn = document.createElement('button');
+            pBtn.className = "btn btn-success";
+            pBtn.id = "pendingBtn";
+            pBtn.innerText = "View Pending Requests";
+            pBtn.onclick = pendingRs;
+            pBtn.getElementsByTagName("h1")[0].appendChild(pBtn);
+
+            //submit new reimbursement
+            let newBtn = document.createElement('button');
+            newBtn.className = "btn btn-success";
+            newBtn.id = "newReqBtn";
+            newBtn.innerText = "VSubmit New Request";
+            newBtn.onclick = addR;
+            newBtn.getElementsByTagName("h1")[0].appendChild(newBtn);
+
         } else if (uRoleId == 2) {
-            //console.log("to manager portal");
-            window.location.href = "manager.html";
+           
+           
             
             
         } else { console.log("Holy Cow, Batman!"); }

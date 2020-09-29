@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" id="bootstrap-css">
     <link rel="stylesheet" href="style.css">
-    <title>Employee Login</title>
+    <title>Scquirrel Dog Enterprises</title>
 
 </head>
 
@@ -53,6 +53,44 @@
                 <tbody id="reimbursementbody">
                 </tbody>
             </table>
+        </div>
+
+        <div hidden="true" id="submitnewreim">
+            <h3 id="welcome-row">Squirrel Dog Enterprises</h3>
+            <h3 id="welcome-row">Reimbursement Request Form</h3>
+            <form id="addR">
+                <h5>Please complete the following:</h5>
+                    <div id="newreq-text" class="input-group mb-3">
+                        <div class="input-group-prepend">
+                            <span  class="input-group-text text-info">Amount Requested: $</span>
+                        </div>
+                            <input id="amount" type="number" step=.01>
+                        </div>
+                        <div id="rtype" class="text-center text-info rtype">
+                            <p>Select Reimbursement Type:</p>
+                        <div>
+                            <input class="text-info" type="radio" id="rType1" name="type" value=1>
+                                <label for="rType1">LODGING</label>
+                                  
+                            <input class="text-info" type="radio" id="rType2" name="type" value=2>
+                                <label for="rType2">TRAVEL</label>
+                                  
+                            <input class="text-info" type="radio" id="rType3" name="type" value=3>
+                                <label for="rType3">FOOD</label>
+    
+                            <input class="text-info" type="radio" id="rType4" name="type" value=4>
+                                <label for="rType4">OTHER</label>
+                        </div>
+                        <div>
+                            <label for="textarea" class="text-info">Brief description for Request:</label>
+                            <textarea id="description" rows="2"></textarea>
+                        </div>
+                        <div>
+                            <input id="submitnewrequest" onsubmit="document.getElementById('newreqform').style.display = 'none'" type="submit" name="submit" style="width:100%" class="btn btn-info btn-md" value="submit">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js "></script>

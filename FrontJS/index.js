@@ -29,29 +29,28 @@ async function loginFunc() {
     //console.log(resp);
 
     if (resp.status == 200) {
-        let data = await resp.json();
+        let uRoleId = await resp.json();
         console.log(resp);
-        let uRoleId = data;
         sessionStorage.setItem("uRoleId", uRoleId);
         //console.log("URoleId: " + uRoleId);
         document.getElementById("login").setAttribute("hidden", true);
         etable.removeAttribute("hidden");
         
-        let button = document.createElement('button');
-        button.className = "btn btn-success";
-        button.id = "logoutbtn";
-        button.innerText = "Logout";
-        button.onclick = logout;
-        document.getElementsByTagName("h1")[0].appendChild(button);
+        let logoutBtn = document.createElement('button');
+        logoutBtn.className = "btn btn-success";
+        logoutBtn.id = "logoutbtn";
+        logoutBtn.innerText = "Logout";
+        logoutBtn.onclick = logout;
+        document.getElementsByTagName("h1")[0].appendChild(logoutBtn);
             
         if (uRoleId == 1) {
-            //view closed/resolved (approved & denied) requests
-            let cBtn = document.createElement('button');
-            cBtn.className = "btn btn-success";
-            cBtn.id = "closedBtn";
-            cBtn.innerText = "View Resolved Requests";
-            cBtn.onclick = resolvedRs;
-            cBtn.getElementsByTagName("h1")[0].appendChild(cBtn);
+            //view resolved (approved & denied) requests
+            let resBtn = document.createElement('button');
+            resBtn.className = "btn btn-success";
+            resBtn.id = "closedBtn";
+            resBtn.innerText = "View Resolved Requests";
+            resBtn.onclick = resolvedRs;
+            resBtn.getElementsByTagName("h1")[0].appendChild(resBtn);
 
             //view pending requests
             let pBtn = document.createElement('button');
@@ -65,7 +64,7 @@ async function loginFunc() {
             let newBtn = document.createElement('button');
             newBtn.className = "btn btn-success";
             newBtn.id = "newReqBtn";
-            newBtn.innerText = "VSubmit New Request";
+            newBtn.innerText = "Submit New Request";
             newBtn.onclick = addR;
             newBtn.getElementsByTagName("h1")[0].appendChild(newBtn);
 

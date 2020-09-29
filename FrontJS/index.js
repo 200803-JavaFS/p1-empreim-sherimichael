@@ -1,4 +1,6 @@
 const url = "http://localhost:8080/project1/"
+const eTable = document.getElementsByTagName("table")[0];
+const mTable = document.getElementsByTagName("table")[1];
 
 //*****************  Login feature  ************************
 
@@ -31,11 +33,18 @@ async function loginFunc() {
         console.log(resp);
         let uRoleId = data;
         sessionStorage.setItem("uRoleId", uRoleId);
-        console.log("URoleId: " + uRoleId);
+        //console.log("URoleId: " + uRoleId);
+        document.getElementById("login").setAttribute("hidden", true);
+        rtable.removeAttribute("hidden");
+        
+        let button = document.createElement('button');
+        button.className = "btn btn-success";
+        button.id = "logoutbtn";
+        button.innerText = "Logout";
+        button.onclick = logout;
+        document.getElementsByTagName("h1")[0].appendChild(button);
+            
         if (uRoleId == 1) {
-            //console.log("to employee portal");
-            window.location.href ="employee.html";
-    
         } else if (uRoleId == 2) {
             //console.log("to manager portal");
             window.location.href = "manager.html";
@@ -44,11 +53,6 @@ async function loginFunc() {
         } else { console.log("Holy Cow, Batman!"); }
     } else {
         alert('Oops. Something went wrong. Please login again.')
-        resetLogin();
+        document.getElementById("login").reset();
     }    
-
-    function resetLogin() {
-        console.log("@resetLogin");
-        location.reload();
-    }
 }

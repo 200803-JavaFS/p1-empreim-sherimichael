@@ -44,12 +44,13 @@ public class LoginController {
 				LoginDTO l = om.readValue(body, LoginDTO.class);
 				
 				if (ls.login(l)) {
+					
 					HttpSession ses = req.getSession();
 					ses.setAttribute("user", l);
 					ses.setAttribute("loggedin", true);
-					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId().getRoleId());
 					res.setStatus(200);
-					System.out.println("in LC ses = " + ses);
+					ses.setAttribute("user_role_id", us.findByUsername(l.username).getUserRoleId().getRoleId());
+					//System.out.println("in LC ses = " + ses);
 					String json = om.writeValueAsString((Integer)ses.getAttribute("user_role_id"));
 					res.getWriter().println(json);
 				} else {
